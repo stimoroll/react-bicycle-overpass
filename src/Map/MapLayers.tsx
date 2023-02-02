@@ -5,7 +5,7 @@ import LayerBtn from "./LayerBtn";
 
 // Renders checkboxes to toggle layers
 type MapLayersProps = {
-  toggleLayer: (key: string) => Promise<void>;
+  toggleLayer: (key: any) => Promise<void | any>;
 };
 const MapLayers: React.FC<MapLayersProps> = ({ toggleLayer }) => {
   return (

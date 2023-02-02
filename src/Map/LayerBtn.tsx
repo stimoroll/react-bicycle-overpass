@@ -54,7 +54,8 @@ const LayerBtn: React.FC<LayerBtnProps> = ({
       {icon && <img src={icon} alt={label} className="mr-2" />}
       <span className="mr-2">{label}</span>
       {nbResults !== null && (
-        <Badge pill variant="danger">
+        // <Badge pill> variant="danger">
+        <Badge pill>
           {nbResults}
         </Badge>
       )}

@@ -1,5 +1,6 @@
 const BASE_URL = "https://overpass-api.de/api/interpreter";
 
+
 type Elements = {
   lat: number;
   lon: number;
@@ -16,7 +17,8 @@ export const fetchMarkers = async (
   try {
     const query = `
       [out:json][timeout:25];
-      (${layerQuery.replace(/\[BOX\]/gi, box)});
+      area[name="Sosnowiec"]->.sosnowiec;
+      (${layerQuery.replace(/\[BOX\]/gi, box).replace(/\[AREA\]/gi, "(area.sosnowiec)")});
       out;
       >;
       out skel qt;

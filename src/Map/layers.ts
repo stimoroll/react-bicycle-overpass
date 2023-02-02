@@ -3,6 +3,9 @@ import bus from "./Icons/bus.png";
 import primary from "./Icons/primary.png";
 import restaurant from "./Icons/restaurant.png";
 
+//area
+//area[name="Sosnowiec"]->.sosnowiec;
+
 // Layer Mapping type
 type LayerMapping = {
   key: string;
@@ -13,6 +16,18 @@ type LayerMapping = {
 
 // Mapping Layers <=> Overpass queries
 export const layers: LayerMapping[] = [
+  {
+    key: "bicycleways",
+    label: "Bicycleways",
+    icon: school,
+    query: `
+      relation[AREA][route=bicycle];
+      way[AREA][highway=cycleway];
+      `
+      // way[highway=cycleway][BOX];
+      // way(area.sosnowiec)[highway=path][bicycle=designated][BOX];
+      // node["amenity"="college"][BOX];
+  },
   {
     key: "college",
     label: "Colleges",

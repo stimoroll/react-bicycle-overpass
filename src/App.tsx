@@ -8,14 +8,14 @@ import { fetchMarkers } from "./service/overpass";
 
 export default function App() {
   const [activeMarkers, setActiveMarkers] = React.useState<LayerMakers[]>([]);
-  const [mapBounds, setBounds] = React.useState("");
+  const [mapBounds, setBounds] = React.useState(""); //???
 
   /**React.useEffect(() => {
     // TODO research POI ?
   }, [activeLayers, mapBounds])*/
 
   // Toggle a layer on the map
-  const toggleLayer = (key: string) => {
+  const toggleLayer = (key: any) => {
     const activeLayer = activeMarkers.find((layer) => layer.key === key);
     if (activeLayer) {
       // Layer was found: remove its markers
@@ -31,6 +31,7 @@ export default function App() {
         // It layer was found, fetch its markers
         return fetchMarkers(newLayer.query, mapBounds).then((elems) => {
           if (typeof elems !== "boolean") {
+
             const newMarkers: LayerMakers = {
               key,
               icon: newLayer.icon,
@@ -58,12 +59,14 @@ export default function App() {
       <h1>Leaflet CodeSandbox</h1>
       <Map
         fullTitle="My marker"
-        latitude={48.855123611569105}
-        longitude={2.3859649980443733}
+        latitude={50.2713933}
+        longitude={19.1598567}
         setBounds={(bounds) => setBounds(bounds)}
         activeMarkers={activeMarkers}
-      />
+        />
       <MapLayers toggleLayer={toggleLayer} />
     </div>
+  // latitude={48.855123611569105}
+  // longitude={2.3859649980443733}
   );
 }

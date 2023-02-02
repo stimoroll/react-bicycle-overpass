@@ -81,6 +81,7 @@ const Map: React.FC<MapProps> = ({
   useEffect(() => {
     if (layerGroupRef.current) {
       layerGroupRef.current.clearLayers();
+
       activeMarkers.forEach((layer) => {
         const icon = new L.Icon({ iconUrl: layer.icon });
         layer.markers.forEach((marker) => {
