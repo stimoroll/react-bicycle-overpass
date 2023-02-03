@@ -2,6 +2,7 @@ const BASE_URL = "https://overpass-api.de/api/interpreter";
 
 
 type Elements = {
+  type: string;
   lat: number;
   lon: number;
   tags: {

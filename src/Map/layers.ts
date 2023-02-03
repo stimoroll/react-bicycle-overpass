@@ -21,9 +21,12 @@ export const layers: LayerMapping[] = [
     label: "Bicycleways",
     icon: school,
     query: `
-      relation[AREA][route=bicycle];
       way[AREA][highway=cycleway];
       `
+      // relation[AREA][route=bicycle];
+      // way[AREA][highway=path][bicycle=designated];
+
+
       // way[highway=cycleway][BOX];
       // way(area.sosnowiec)[highway=path][bicycle=designated][BOX];
       // node["amenity"="college"][BOX];
@@ -72,3 +75,14 @@ export type LayerMakers = {
     name?: string;
   }[];
 };
+
+
+
+export type PolyLine = {
+  key: string | undefined;
+  icon: string | undefined;
+  nodes: {
+    lat: number;
+    lon: number;
+  }[];
+}

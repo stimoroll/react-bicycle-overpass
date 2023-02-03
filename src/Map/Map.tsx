@@ -2,6 +2,10 @@ import React, { useRef, useEffect } from "react";
 import L, { LatLngExpression } from "leaflet";
 import styled from "styled-components";
 import { LayerMakers } from "./layers";
+// import OverPassLayer from "leaflet-overpass-layer";
+
+// @ts-ignore
+// const opl = new L.OverPassLayer();
 
 // Map container
 const StyledMap = styled.div`
@@ -26,7 +30,7 @@ interface MapProps {
 }
 
 // Map component
-const Map: React.FC<MapProps> = ({
+const MapLeaflet: React.FC<MapProps> = ({
   latitude,
   longitude,
   fullTitle,
@@ -82,6 +86,13 @@ const Map: React.FC<MapProps> = ({
     if (layerGroupRef.current) {
       layerGroupRef.current.clearLayers();
 
+      const line = [[]];
+      //   [ coordinates.point1.lat, coordinates.point1.lng ],
+      //   [ coordinates.point2.lat, coordinates.point2.lng ]
+      // ];      
+
+      const polyLine  = L.polyline(line, {color: 'red'}); //.addTo(map);
+
       activeMarkers.forEach((layer) => {
         const icon = new L.Icon({ iconUrl: layer.icon });
         layer.markers.forEach((marker) => {
@@ -100,4 +111,4 @@ const Map: React.FC<MapProps> = ({
   return <StyledMap id="leaflet-map" />;
 };
 
-export default Map;
+export default MapLeaflet;
