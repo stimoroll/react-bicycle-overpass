@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
-import L, { LatLngExpression } from "leaflet";
+import L, { LatLngExpression, LatLngTuple } from "leaflet";
 import styled from "styled-components";
-import { LayerMakers } from "./layers";
+import { LayerMakers, PolyLine, PolyLineMap } from "./layers";
 // import OverPassLayer from "leaflet-overpass-layer";
 
 // @ts-ignore
@@ -26,6 +26,7 @@ interface MapProps {
   longitude: number;
   fullTitle: string;
   activeMarkers: LayerMakers[];
+  activeWays?: PolyLine[] | null;
   setBounds: (bounds: string) => void;
 }
 
@@ -35,6 +36,7 @@ const MapLeaflet: React.FC<MapProps> = ({
   longitude,
   fullTitle,
   activeMarkers,
+  activeWays,
   setBounds
 }) => {
   const mapRef = useRef<L.Map>();
@@ -86,17 +88,10 @@ const MapLeaflet: React.FC<MapProps> = ({
     if (layerGroupRef.current) {
       layerGroupRef.current.clearLayers();
 
-      const line = [[]];
-      //   [ coordinates.point1.lat, coordinates.point1.lng ],
-      //   [ coordinates.point2.lat, coordinates.point2.lng ]
-      // ];      
-
-      const polyLine  = L.polyline(line, {color: 'red'}); //.addTo(map);
-
       activeMarkers.forEach((layer) => {
         const icon = new L.Icon({ iconUrl: layer.icon });
         layer.markers.forEach((marker) => {
-          const pos: LatLngExpression = [marker.lat, marker.lon];
+          const pos: LatLngTuple = [marker.lat, marker.lon];
           const mapMarker = L.marker(pos, { icon });
           if (marker.name) {
             mapMarker.bindPopup(marker.name);
@@ -106,6 +101,18 @@ const MapLeaflet: React.FC<MapProps> = ({
       });
     }
   }, [activeMarkers]);
+
+  useEffect(() => {
+    activeWays?.forEach((way) => {
+      const line:LatLngTuple[] = way.nodes.map(node => [node?.lat, node?.lon]);
+      const mapLine = L.polyline(line, {color: 'red'});
+      if (layerGroupRef.current) mapLine.addTo(layerGroupRef.current);
+    })
+
+
+    // const polyLine  = L.polyline(line, {color: 'red'}); //.addTo(map);
+  }, [activeWays])
+  
 
   // Render the map
   return <StyledMap id="leaflet-map" />;

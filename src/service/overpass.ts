@@ -6,8 +6,10 @@ type Elements = {
   lat: number;
   lon: number;
   tags: {
+    amenity: string;
     name: string;
     website: string;
+    higway: string;
   };
 };
 

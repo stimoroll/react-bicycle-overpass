@@ -3,11 +3,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 import MapLeaflet from "./Map/Map";
 import MapLayers from "./Map/MapLayers";
-import { LayerMakers, layers } from "./Map/layers";
+import { LayerMakers, layers, PolyLine } from "./Map/layers";
 import { fetchMarkers } from "./service/overpass";
+
+type poiNode = {
+  lat: number,
+  lon: number
+}
+
+type wayNode = {
+  id: number,
+  type: string,
+  nodes: number[]
+  tags: Object
+}
 
 export default function App() {
   const [activeMarkers, setActiveMarkers] = React.useState<LayerMakers[]>([]);
+  const [activeWays, setActiveWays] = React.useState<PolyLine[]>([])
   const [mapBounds, setBounds] = React.useState(""); //???
 
   /**React.useEffect(() => {
@@ -45,43 +58,31 @@ export default function App() {
               }
             });
 
-            const waysArray:Array<any> = elems.filter(el => el?.type === "way")
-
-            // const waysArray:Array<any> = elems.filter(el => el?.type === "way").map((el:any) => {
-            //   return [el?.id, { nodes: el?.nodes, tags: el?.tags }]
-            // });
-
-            // let newArray = Object.entries(obj)
+            const waysArray:Array<any|wayNode> = elems.filter(el => el?.type === "way")
 
             let map1 = new Map(nodesArray);
             let map2 = new Map(waysArray);
 
-            console.log(waysArray);
-            console.log(map1);
 
-            type poiNode = {
-              lat: number,
-              lon: number
-            }
-
-            let points = waysArray.map(way => {
-              //podmiana node na nowe
+            const newLines:PolyLine[] = waysArray.map(way => {
               way.nodes = way?.nodes.map((point: any) => {
                 const poi = map1.get(point)
-                // console.log(poi)
                 return poi
               })
               return way
             });
 
-            // for (let [key, value] of map2) {
-            //   console.log(key + " = " + value);
-            // }
+            setActiveWays([...activeWays, ...newLines]);
+
 
             const newMarkers: LayerMakers = {
               key,
               icon: newLayer.icon,
               markers: elems
+                .filter((elem) => elem.type === "node" && (
+                  elem.tags?.amenity in ['school', 'restaurant'] ||
+                  elem.tags?.higway === 'bus_stop'
+                ))
                 .filter((elem) => elem.lat && elem.lon)
                 .map((elem) => ({
                   lat: elem.lat,
@@ -109,6 +110,7 @@ export default function App() {
         longitude={19.1598567}
         setBounds={(bounds) => setBounds(bounds)}
         activeMarkers={activeMarkers}
+        activeWays={activeWays}
         />
       <MapLayers toggleLayer={toggleLayer} />
     </div>

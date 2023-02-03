@@ -2,6 +2,7 @@ import school from "./Icons/school.png";
 import bus from "./Icons/bus.png";
 import primary from "./Icons/primary.png";
 import restaurant from "./Icons/restaurant.png";
+import { LatLngTuple } from "leaflet";
 
 //area
 //area[name="Sosnowiec"]->.sosnowiec;
@@ -77,7 +78,6 @@ export type LayerMakers = {
 };
 
 
-
 export type PolyLine = {
   key: string | undefined;
   icon: string | undefined;
@@ -86,3 +86,15 @@ export type PolyLine = {
     lon: number;
   }[];
 }
+
+
+export type PolyLineMap = {
+  key: string | undefined;
+  icon: string | undefined;
+  nodes: LatLngTuple[];
+}
+
+// „LatLngExpression[] | LatLngExpression[][]”.
+//   Typu „number[][]” nie można przypisać do typu „LatLngExpression[]”.
+//     Typu „number[]” nie można przypisać do typu „LatLngExpression”.
+//       Typu „number[]” nie można przypisać do typu „LatLngTuple”
