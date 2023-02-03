@@ -72,9 +72,11 @@ export default function App() {
               return way
             });
 
-            setActiveWays([...activeWays, ...newLines]);
+            setActiveWays([...newLines]);
 
 
+            //TODO: zmien filtry na poczatek tylko node a potem dodawaj tags amenity 
+            //TODO: tags higway itp - i sprawdz literowki
             const newMarkers: LayerMakers = {
               key,
               icon: newLayer.icon,

@@ -23,9 +23,9 @@ export const layers: LayerMapping[] = [
     icon: school,
     query: `
       way[AREA][highway=cycleway];
+      relation[AREA][route=bicycle];
+      way[AREA][highway=path][bicycle=designated];
       `
-      // relation[AREA][route=bicycle];
-      // way[AREA][highway=path][bicycle=designated];
 
 
       // way[highway=cycleway][BOX];

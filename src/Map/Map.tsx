@@ -41,6 +41,7 @@ const MapLeaflet: React.FC<MapProps> = ({
 }) => {
   const mapRef = useRef<L.Map>();
   const layerGroupRef = useRef<L.LayerGroup>();
+  const layerWaysGroupRef = useRef<L.LayerGroup>();
 
   // Compute a string version of the map bounds for overpass API requests
   const updateBounds = () => {
@@ -70,6 +71,7 @@ const MapLeaflet: React.FC<MapProps> = ({
       });
       // Create layer group
       layerGroupRef.current = L.layerGroup().addTo(mapRef.current);
+      layerWaysGroupRef.current = L.layerGroup().addTo(mapRef.current);
       // Create marker
       const localisation = L.marker(center);
       localisation.bindPopup(fullTitle);
@@ -103,16 +105,35 @@ const MapLeaflet: React.FC<MapProps> = ({
   }, [activeMarkers]);
 
   useEffect(() => {
-    activeWays?.forEach((way) => {
-      const line:LatLngTuple[] = way.nodes.map(node => [node?.lat, node?.lon]);
-      const mapLine = L.polyline(line, {color: 'red'});
-      if (layerGroupRef.current) mapLine.addTo(layerGroupRef.current);
-    })
+    if (layerWaysGroupRef.current) {
+      // layerGroupRef.current.clearLayers();
+      const line4:LatLngExpression[] = [[50.2864856,19.1427196], [50.2884856, 19.1427196]];
+      const mapLine1 = L.polyline(line4, {color: 'red'});
+        if (layerWaysGroupRef.current) mapLine1.addTo(layerWaysGroupRef.current);
 
+      const line3:LatLngExpression[] = [[50.2713933, 19.1798567], [50.2716743, 19.1599677]];
+      const mapLine2 = L.polyline(line3, {color: 'red'});
+        if (layerWaysGroupRef.current) mapLine2.addTo(layerWaysGroupRef.current);
 
+      activeWays?.forEach((way) => {
+        const line:LatLngExpression[] = way.nodes.map(node => [node?.lat, node?.lon]);
+        const mapLine = L.polyline(line, {color: 'red'});
+        if (layerWaysGroupRef.current) mapLine.addTo(layerWaysGroupRef.current);
+      })
+
+    }
     // const polyLine  = L.polyline(line, {color: 'red'}); //.addTo(map);
   }, [activeWays])
   
+  // useEffect(() => {
+  //   if (layerGroupRef.current) {
+  //     layerGroupRef.current.clearLayers();
+
+  //     const line3:LatLngExpression[] = [[50.2713933, 19.1798567], [50.2716743, 19.1599677]];
+  //     const mapLine = L.polyline(line3, {color: 'red'});
+  //       if (layerGroupRef.current) mapLine.addTo(layerGroupRef.current);
+  //     }
+  // },[])
 
   // Render the map
   return <StyledMap id="leaflet-map" />;
