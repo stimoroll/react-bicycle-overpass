@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?><gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creator="Graphhopper version 7e3a98bd316745a7cc48ba78958624b9544e4d61" version="1.1" xmlns:gh="https://graphhopper.com/public/schema/gpx/1.1">
+<metadata><copyright author="OpenStreetMap contributors"/><link href="http://graphhopper.com"><text>GraphHopper GPX</text></link><time>2020-10-25T19:02:03Z</time></metadata>
+<rte>
+<rtept lat="50.267007" lon="19.136789"><extensions><gh:distance>2.0</gh:distance><gh:time>1432</gh:time><gh:direction>S</gh:direction><gh:azimuth>167.85</gh:azimuth><gh:sign>0</gh:sign></extensions></rtept>
+<rtept lat="50.26699" lon="19.136795"><extensions><gh:distance>30.7</gh:distance><gh:time>22104</gh:time><gh:direction>NE</gh:direction><gh:azimuth>62.3</gh:azimuth><gh:sign>-3</gh:sign></extensions></rtept>
+<rtept lat="50.267079" lon="19.1372"><extensions><gh:distance>22.8</gh:distance><gh:time>16404</gh:time><gh:direction>E</gh:direction><gh:azimuth>110.99</gh:azimuth><gh:sign>1</gh:sign></extensions></rtept>
+<rtept lat="50.266977" lon="19.137476"><extensions><gh:distance>263.8</gh:distance><gh:time>189901</gh:time><gh:direction>S</gh:direction><gh:azimuth>161.32</gh:azimuth><gh:sign>1</gh:sign></extensions></rtept>
+<rtept lat="50.264671" lon="19.138286"><extensions><gh:distance>0.0</gh:distance><gh:time>0</gh:time><gh:sign>4</gh:sign></extensions></rtept>
+</rte>
+<trk><name>GraphHopper Track</name><trkseg>
+<trkpt lat="50.267007" lon="19.136789"><ele>255.48</ele><time>2020-10-25T19:02:03Z</time></trkpt>
+<trkpt lat="50.26699" lon="19.136795"><ele>255.46</ele><time>2020-10-25T19:02:04Z</time></trkpt>
+<trkpt lat="50.267037" lon="19.136936"><ele>255.2</ele></trkpt>
+<trkpt lat="50.267079" lon="19.1372"><ele>254.73</ele><time>2020-10-25T19:02:26Z</time></trkpt>
+<trkpt lat="50.267057" lon="19.137289"><ele>254.54</ele></trkpt>
+<trkpt lat="50.266977" lon="19.137476"><ele>254.12</ele><time>2020-10-25T19:02:42Z</time></trkpt>
+<trkpt lat="50.266331" lon="19.137817"><ele>253.78</ele></trkpt>
+<trkpt lat="50.26516" lon="19.138212"><ele>254.66</ele></trkpt>
+<trkpt lat="50.265005" lon="19.138252"><ele>254.76</ele></trkpt>
+<trkpt lat="50.264671" lon="19.138286"><ele>254.76</ele><time>2020-10-25T19:05:52Z</time></trkpt>
+</trkseg>
+</trk>
+</gpx>

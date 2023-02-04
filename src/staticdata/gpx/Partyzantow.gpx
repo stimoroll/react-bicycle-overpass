@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpsies="https://www.gpsies.com/GPX/1/0" creator="GPSies https://www.gpsies.com - Partyzantow" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://www.gpsies.com/GPX/1/0 https://www.gpsies.com/gpsies.xsd">
+  <metadata>
+    <name>Partyzantow</name>
+    <author>
+      <name>RowerowySosnowiec</name>
+      <link href="https://www.gpsies.com/mapUser.do?username=RowerowySosnowiec">
+        <text>RowerowySosnowiec on GPSies.com</text>
+        <type>GPSiesUserOnWeb</type>
+      </link>
+    </author>
+    <link href="https://www.gpsies.com/map.do?fileId=rgnxlxrysozwsypa">
+      <text>Partyzantow on GPSies.com</text>
+      <type>trackOnWeb</type>
+    </link>
+    <time>2018-07-11T22:02:03Z</time>
+    <extensions>
+      <gpsies:property>one-way trip</gpsies:property>
+      <gpsies:trackLengthMeter>236.7087563262075</gpsies:trackLengthMeter>
+      <gpsies:totalAscentMeter>1.0</gpsies:totalAscentMeter>
+      <gpsies:totalDescentMeter>1.0</gpsies:totalDescentMeter>
+      <gpsies:minHeightMeter>252.0</gpsies:minHeightMeter>
+      <gpsies:maxHeightMeter>253.0</gpsies:maxHeightMeter>
+    </extensions>
+  </metadata>
+  <trk>
+    <name>Partyzantow on GPSies.com</name>
+    <link href="https://www.gpsies.com/map.do?fileId=rgnxlxrysozwsypa">
+      <type>trackOnWeb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/rg/map/rgnxlxrysozwsypa_map.png">
+      <type>elevationChartUrlMap</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/rg/mapThumb/rgnxlxrysozwsypa_mapThumb.png">
+      <type>elevationChartUrlMapThumb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/rg/tab/rgnxlxrysozwsypa_tab.png">
+      <type>elevationChartUrlTab</type>
+    </link>
+    <trkseg>
+      <trkpt lat="50.27093330" lon="19.14188070">
+        <ele>252.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.27093000" lon="19.14188000">
+        <ele>252.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.27075000" lon="19.14189000">
+        <ele>252.00000</ele>
+        <time>2010-01-01T00:00:07Z</time>
+      </trkpt>
+      <trkpt lat="50.27065000" lon="19.14188000">
+        <ele>252.00000</ele>
+        <time>2010-01-01T00:00:11Z</time>
+      </trkpt>
+      <trkpt lat="50.26961000" lon="19.14203000">
+        <ele>253.00000</ele>
+        <time>2010-01-01T00:00:53Z</time>
+      </trkpt>
+      <trkpt lat="50.26956000" lon="19.14183000">
+        <ele>253.00000</ele>
+        <time>2010-01-01T00:00:58Z</time>
+      </trkpt>
+      <trkpt lat="50.26951000" lon="19.14174000">
+        <ele>253.00000</ele>
+        <time>2010-01-01T00:01:01Z</time>
+      </trkpt>
+      <trkpt lat="50.26949000" lon="19.14142000">
+        <ele>252.00000</ele>
+        <time>2010-01-01T00:01:09Z</time>
+      </trkpt>
+      <trkpt lat="50.26945000" lon="19.14131000">
+        <ele>252.00000</ele>
+        <time>2010-01-01T00:01:13Z</time>
+      </trkpt>
+      <trkpt lat="50.26942000" lon="19.14119000">
+        <ele>253.00000</ele>
+        <time>2010-01-01T00:01:16Z</time>
+      </trkpt>
+      <trkpt lat="50.26944000" lon="19.14112000">
+        <ele>253.00000</ele>
+        <time>2010-01-01T00:01:18Z</time>
+      </trkpt>
+      <trkpt lat="50.26944000" lon="19.14099000">
+        <ele>252.00000</ele>
+        <time>2010-01-01T00:01:21Z</time>
+      </trkpt>
+      <trkpt lat="50.26939000" lon="19.14088000">
+        <ele>252.00000</ele>
+        <time>2010-01-01T00:01:25Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+

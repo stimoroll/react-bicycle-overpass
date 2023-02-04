@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpsies="https://www.gpsies.com/GPX/1/0" creator="GPSies https://www.gpsies.com - Wspolna" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://www.gpsies.com/GPX/1/0 https://www.gpsies.com/gpsies.xsd">
+  <metadata>
+    <name>Wspolna</name>
+    <author>
+      <name>RowerowySosnowiec</name>
+      <link href="https://www.gpsies.com/mapUser.do?username=RowerowySosnowiec">
+        <text>RowerowySosnowiec on GPSies.com</text>
+        <type>GPSiesUserOnWeb</type>
+      </link>
+    </author>
+    <link href="https://www.gpsies.com/map.do?fileId=gwnfblnrzeurogcg">
+      <text>Wspolna on GPSies.com</text>
+      <type>trackOnWeb</type>
+    </link>
+    <time>2018-07-11T22:18:37Z</time>
+    <extensions>
+      <gpsies:property>one-way trip</gpsies:property>
+      <gpsies:trackLengthMeter>35.93813636991505</gpsies:trackLengthMeter>
+      <gpsies:totalAscentMeter>0.0</gpsies:totalAscentMeter>
+      <gpsies:totalDescentMeter>1.0</gpsies:totalDescentMeter>
+      <gpsies:minHeightMeter>254.0</gpsies:minHeightMeter>
+      <gpsies:maxHeightMeter>255.0</gpsies:maxHeightMeter>
+    </extensions>
+  </metadata>
+  <trk>
+    <name>Wspolna on GPSies.com</name>
+    <link href="https://www.gpsies.com/map.do?fileId=gwnfblnrzeurogcg">
+      <type>trackOnWeb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/gw/map/gwnfblnrzeurogcg_map.png">
+      <type>elevationChartUrlMap</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/gw/mapThumb/gwnfblnrzeurogcg_mapThumb.png">
+      <type>elevationChartUrlMapThumb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/gw/tab/gwnfblnrzeurogcg_tab.png">
+      <type>elevationChartUrlTab</type>
+    </link>
+    <trkseg>
+      <trkpt lat="50.27034700" lon="19.12678520">
+        <ele>255.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.27034000" lon="19.12678000">
+        <ele>255.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.27040000" lon="19.12677000">
+        <ele>255.00000</ele>
+        <time>2010-01-01T00:00:02Z</time>
+      </trkpt>
+      <trkpt lat="50.27051000" lon="19.12641000">
+        <ele>254.00000</ele>
+        <time>2010-01-01T00:00:12Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+

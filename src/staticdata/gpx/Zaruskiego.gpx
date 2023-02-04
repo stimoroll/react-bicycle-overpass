@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpsies="https://www.gpsies.com/GPX/1/0" creator="GPSies https://www.gpsies.com - Zaruskiego" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://www.gpsies.com/GPX/1/0 https://www.gpsies.com/gpsies.xsd">
+  <metadata>
+    <name>Zaruskiego</name>
+    <author>
+      <name>RowerowySosnowiec</name>
+      <link href="https://www.gpsies.com/mapUser.do?username=RowerowySosnowiec">
+        <text>RowerowySosnowiec on GPSies.com</text>
+        <type>GPSiesUserOnWeb</type>
+      </link>
+    </author>
+    <link href="https://www.gpsies.com/map.do?fileId=hgqtlkiuftlymmzq">
+      <text>Zaruskiego on GPSies.com</text>
+      <type>trackOnWeb</type>
+    </link>
+    <time>2018-07-13T10:29:09Z</time>
+    <extensions>
+      <gpsies:property>one-way trip</gpsies:property>
+      <gpsies:trackLengthMeter>605.1553752427192</gpsies:trackLengthMeter>
+      <gpsies:totalAscentMeter>16.0</gpsies:totalAscentMeter>
+      <gpsies:totalDescentMeter>1.0</gpsies:totalDescentMeter>
+      <gpsies:minHeightMeter>280.0</gpsies:minHeightMeter>
+      <gpsies:maxHeightMeter>296.0</gpsies:maxHeightMeter>
+    </extensions>
+  </metadata>
+  <trk>
+    <name>Zaruskiego on GPSies.com</name>
+    <link href="https://www.gpsies.com/map.do?fileId=hgqtlkiuftlymmzq">
+      <type>trackOnWeb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/hg/map/hgqtlkiuftlymmzq_map.png">
+      <type>elevationChartUrlMap</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/hg/mapThumb/hgqtlkiuftlymmzq_mapThumb.png">
+      <type>elevationChartUrlMapThumb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/hg/tab/hgqtlkiuftlymmzq_tab.png">
+      <type>elevationChartUrlTab</type>
+    </link>
+    <trkseg>
+      <trkpt lat="50.28874150" lon="19.16236850">
+        <ele>280.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.28874000" lon="19.16237000">
+        <ele>280.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.28856000" lon="19.16349000">
+        <ele>283.00000</ele>
+        <time>2010-01-01T00:00:29Z</time>
+      </trkpt>
+      <trkpt lat="50.28813000" lon="19.16583000">
+        <ele>290.00000</ele>
+        <time>2010-01-01T00:01:31Z</time>
+      </trkpt>
+      <trkpt lat="50.28799000" lon="19.16588000">
+        <ele>291.00000</ele>
+        <time>2010-01-01T00:01:37Z</time>
+      </trkpt>
+      <trkpt lat="50.28793000" lon="19.16621000">
+        <ele>292.00000</ele>
+        <time>2010-01-01T00:01:46Z</time>
+      </trkpt>
+      <trkpt lat="50.28793000" lon="19.16635000">
+        <ele>292.00000</ele>
+        <time>2010-01-01T00:01:49Z</time>
+      </trkpt>
+      <trkpt lat="50.28772000" lon="19.16752000">
+        <ele>296.00000</ele>
+        <time>2010-01-01T00:02:21Z</time>
+      </trkpt>
+      <trkpt lat="50.28756000" lon="19.16804000">
+        <ele>296.00000</ele>
+        <time>2010-01-01T00:02:35Z</time>
+      </trkpt>
+      <trkpt lat="50.28748000" lon="19.16810000">
+        <ele>295.00000</ele>
+        <time>2010-01-01T00:02:39Z</time>
+      </trkpt>
+      <trkpt lat="50.28730000" lon="19.16854000">
+        <ele>295.00000</ele>
+        <time>2010-01-01T00:02:52Z</time>
+      </trkpt>
+      <trkpt lat="50.28731000" lon="19.16869000">
+        <ele>295.00000</ele>
+        <time>2010-01-01T00:02:56Z</time>
+      </trkpt>
+      <trkpt lat="50.28723000" lon="19.16915000">
+        <ele>295.00000</ele>
+        <time>2010-01-01T00:03:08Z</time>
+      </trkpt>
+      <trkpt lat="50.28711000" lon="19.16970000">
+        <ele>296.00000</ele>
+        <time>2010-01-01T00:03:23Z</time>
+      </trkpt>
+      <trkpt lat="50.28697000" lon="19.17021000">
+        <ele>295.00000</ele>
+        <time>2010-01-01T00:03:37Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+

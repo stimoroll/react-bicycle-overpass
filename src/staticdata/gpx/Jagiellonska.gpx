@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpsies="https://www.gpsies.com/GPX/1/0" creator="GPSies https://www.gpsies.com - Jagiellonska" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://www.gpsies.com/GPX/1/0 https://www.gpsies.com/gpsies.xsd">
+  <metadata>
+    <name>Jagiellonska</name>
+    <author>
+      <name>RowerowySosnowiec</name>
+      <link href="https://www.gpsies.com/mapUser.do?username=RowerowySosnowiec">
+        <text>RowerowySosnowiec on GPSies.com</text>
+        <type>GPSiesUserOnWeb</type>
+      </link>
+    </author>
+    <link href="https://www.gpsies.com/map.do?fileId=gxczejpnpkjxaxsg">
+      <text>Jagiellonska on GPSies.com</text>
+      <type>trackOnWeb</type>
+    </link>
+    <time>2018-07-11T22:16:22Z</time>
+    <extensions>
+      <gpsies:property>one-way trip</gpsies:property>
+      <gpsies:trackLengthMeter>664.2874621787321</gpsies:trackLengthMeter>
+      <gpsies:totalAscentMeter>3.0</gpsies:totalAscentMeter>
+      <gpsies:totalDescentMeter>1.0</gpsies:totalDescentMeter>
+      <gpsies:minHeightMeter>254.0</gpsies:minHeightMeter>
+      <gpsies:maxHeightMeter>256.0</gpsies:maxHeightMeter>
+    </extensions>
+  </metadata>
+  <trk>
+    <name>Jagiellonska on GPSies.com</name>
+    <link href="https://www.gpsies.com/map.do?fileId=gxczejpnpkjxaxsg">
+      <type>trackOnWeb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/gx/map/gxczejpnpkjxaxsg_map.png">
+      <type>elevationChartUrlMap</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/gx/mapThumb/gxczejpnpkjxaxsg_mapThumb.png">
+      <type>elevationChartUrlMapThumb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/gx/tab/gxczejpnpkjxaxsg_tab.png">
+      <type>elevationChartUrlTab</type>
+    </link>
+    <trkseg>
+      <trkpt lat="50.26690920" lon="19.13481040">
+        <ele>254.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.26691000" lon="19.13481000">
+        <ele>254.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.26703000" lon="19.13451000">
+        <ele>254.00000</ele>
+        <time>2010-01-01T00:00:09Z</time>
+      </trkpt>
+      <trkpt lat="50.26747000" lon="19.13352000">
+        <ele>255.00000</ele>
+        <time>2010-01-01T00:00:39Z</time>
+      </trkpt>
+      <trkpt lat="50.26838000" lon="19.13168000">
+        <ele>255.00000</ele>
+        <time>2010-01-01T00:01:39Z</time>
+      </trkpt>
+      <trkpt lat="50.26884000" lon="19.13057000">
+        <ele>256.00000</ele>
+        <time>2010-01-01T00:02:13Z</time>
+      </trkpt>
+      <trkpt lat="50.26938000" lon="19.12940000">
+        <ele>255.00000</ele>
+        <time>2010-01-01T00:02:50Z</time>
+      </trkpt>
+      <trkpt lat="50.27017000" lon="19.12758000">
+        <ele>256.00000</ele>
+        <time>2010-01-01T00:03:46Z</time>
+      </trkpt>
+      <trkpt lat="50.27022000" lon="19.12745000">
+        <ele>256.00000</ele>
+        <time>2010-01-01T00:03:50Z</time>
+      </trkpt>
+      <trkpt lat="50.27019000" lon="19.12743000">
+        <ele>256.00000</ele>
+        <time>2010-01-01T00:03:51Z</time>
+      </trkpt>
+      <trkpt lat="50.27026000" lon="19.12726000">
+        <ele>256.00000</ele>
+        <time>2010-01-01T00:03:56Z</time>
+      </trkpt>
+      <trkpt lat="50.27021000" lon="19.12722000">
+        <ele>256.00000</ele>
+        <time>2010-01-01T00:03:59Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+

@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from "react";
-import L, { LatLngExpression, LatLngTuple } from "leaflet";
+import React, { useRef, useState, useEffect } from "react";
+import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression } from "leaflet";
 import styled from "styled-components";
 import { LayerMakers, PolyLine, PolyLineMap } from "./layers";
 // import OverPassLayer from "leaflet-overpass-layer";
@@ -39,9 +39,13 @@ const MapLeaflet: React.FC<MapProps> = ({
   activeWays,
   setBounds
 }) => {
+
+  const [SVGOutline, setSVGOutline] = useState(null);
+
   const mapRef = useRef<L.Map>();
   const layerGroupRef = useRef<L.LayerGroup>();
   const layerWaysGroupRef = useRef<L.LayerGroup>();
+  const layerShapeGroupRef = useRef<L.LayerGroup>();
 
   // Compute a string version of the map bounds for overpass API requests
   const updateBounds = () => {
@@ -72,10 +76,11 @@ const MapLeaflet: React.FC<MapProps> = ({
       // Create layer group
       layerGroupRef.current = L.layerGroup().addTo(mapRef.current);
       layerWaysGroupRef.current = L.layerGroup().addTo(mapRef.current);
+      layerShapeGroupRef.current = L.layerGroup().addTo(mapRef.current);
       // Create marker
       const localisation = L.marker(center);
       localisation.bindPopup(fullTitle);
-      localisation.addTo(mapRef.current);
+      // localisation.addTo(mapRef.current);
       // Create radius around marker
       //L.circle(center, { radius: 500 }).addTo(mapRef.current);
 
@@ -83,7 +88,7 @@ const MapLeaflet: React.FC<MapProps> = ({
       mapRef.current.on("moveend", updateBounds);
       updateBounds();
     }
-  });
+  },[]);
 
   // Dynamically add markers
   useEffect(() => {
@@ -124,16 +129,90 @@ const MapLeaflet: React.FC<MapProps> = ({
     }
     // const polyLine  = L.polyline(line, {color: 'red'}); //.addTo(map);
   }, [activeWays])
-  
-  // useEffect(() => {
-  //   if (layerGroupRef.current) {
-  //     layerGroupRef.current.clearLayers();
 
-  //     const line3:LatLngExpression[] = [[50.2713933, 19.1798567], [50.2716743, 19.1599677]];
-  //     const mapLine = L.polyline(line3, {color: 'red'});
-  //       if (layerGroupRef.current) mapLine.addTo(layerGroupRef.current);
-  //     }
-  // },[])
+
+  const getData=(setResult:any)=>{
+    fetch('sosnowiec.json'
+    ,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    }
+    )
+      .then(function(response){
+        console.log(response)
+        return response.json();
+      })
+      .then(function(myJson) {
+        console.log(myJson);
+        setResult(myJson)
+      });
+  }
+
+
+  useEffect(() => {
+    getData(setSVGOutline);
+
+    if (layerGroupRef.current) {
+      layerGroupRef.current.clearLayers();
+
+      const line3:LatLngExpression[] = [[50.2713733, 19.1798567], [50.2716743, 19.1599677]];
+      const mapLine = L.polyline(line3, {color: 'blue'});
+        if (layerGroupRef.current) mapLine.addTo(layerGroupRef.current);
+
+        var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svgElement.setAttribute('xmlns', "http://www.w3.org/2000/svg");
+        svgElement.setAttribute('viewBox', "0 0 200 200");
+        svgElement.innerHTML = '<rect width="200" height="200"/><rect x="75" y="23" width="50" height="50" style="fill:red"/><rect x="75" y="123" width="50" height="50" style="fill:#0013ff"/>';
+        L.svgOverlay(svgElement, [[50.2713733, 19.1798567], [50.2716743, 19.1599677]]).addTo(layerGroupRef.current);
+
+      }
+  },[])
+
+  var myStyle = {
+    "color": "#EF9999",
+    "weight": 2,
+    "opacity": 0.7
+};
+
+  useEffect(() =>{
+    if(SVGOutline && layerShapeGroupRef?.current) {
+      console.log("SVGOutline", SVGOutline);
+      const sosno = L.geoJSON(SVGOutline,{
+        style: myStyle
+      })
+      if(sosno && mapRef.current) {
+        sosno.addTo(mapRef.current);
+        // .addTo(layerShapeGroupRef.current);
+      }
+    }
+
+    if(layerShapeGroupRef?.current) {
+      const geojsonFeature = {
+        "type": "Feature" as const,
+        "properties": {
+            "name": "Coors Field",
+            "amenity": "Baseball Stadium",
+            "popupContent": "This is where the Rockies play!"
+        },
+        "geometry": {
+            "type": "MultiPolygon",
+            "coordinates": [
+              [50.2715723, 19.1599667], [50.2715743, 19.1599677]
+            ]
+        }
+      };
+//MultiPolygon //Polygon
+
+      // const outline:L.GeoJSON<any> = L.geoJSON(geojsonFeature, {
+      //   style: myStyle
+      // })
+      // if(outline && mapRef.current) {
+      //   outline.addTo(mapRef.current);
+      // }
+    }
+  },[SVGOutline])
 
   // Render the map
   return <StyledMap id="leaflet-map" />;

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpsies="https://www.gpsies.com/GPX/1/0" creator="GPSies https://www.gpsies.com - Mieroszewskich_1" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://www.gpsies.com/GPX/1/0 https://www.gpsies.com/gpsies.xsd">
+  <metadata>
+    <name>Mieroszewskich_1</name>
+    <author>
+      <name>RowerowySosnowiec</name>
+      <link href="https://www.gpsies.com/mapUser.do?username=RowerowySosnowiec">
+        <text>RowerowySosnowiec on GPSies.com</text>
+        <type>GPSiesUserOnWeb</type>
+      </link>
+    </author>
+    <link href="https://www.gpsies.com/map.do?fileId=hxuiqnqftzsoltne">
+      <text>Mieroszewskich_1 on GPSies.com</text>
+      <type>trackOnWeb</type>
+    </link>
+    <time>2018-07-13T10:33:42Z</time>
+    <extensions>
+      <gpsies:property>one-way trip</gpsies:property>
+      <gpsies:trackLengthMeter>510.321405989838</gpsies:trackLengthMeter>
+      <gpsies:totalAscentMeter>7.0</gpsies:totalAscentMeter>
+      <gpsies:totalDescentMeter>6.0</gpsies:totalDescentMeter>
+      <gpsies:minHeightMeter>300.0</gpsies:minHeightMeter>
+      <gpsies:maxHeightMeter>305.0</gpsies:maxHeightMeter>
+    </extensions>
+  </metadata>
+  <trk>
+    <name>Mieroszewskich_1 on GPSies.com</name>
+    <link href="https://www.gpsies.com/map.do?fileId=hxuiqnqftzsoltne">
+      <type>trackOnWeb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/hx/map/hxuiqnqftzsoltne_map.png">
+      <type>elevationChartUrlMap</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/hx/mapThumb/hxuiqnqftzsoltne_mapThumb.png">
+      <type>elevationChartUrlMapThumb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/hx/tab/hxuiqnqftzsoltne_tab.png">
+      <type>elevationChartUrlTab</type>
+    </link>
+    <trkseg>
+      <trkpt lat="50.28953050" lon="19.18012900">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.28952000" lon="19.18013000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.28886000" lon="19.17975000">
+        <ele>305.00000</ele>
+        <time>2010-01-01T00:00:28Z</time>
+      </trkpt>
+      <trkpt lat="50.28885000" lon="19.17975000">
+        <ele>305.00000</ele>
+        <time>2010-01-01T00:00:28Z</time>
+      </trkpt>
+      <trkpt lat="50.28709000" lon="19.17878000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:01:43Z</time>
+      </trkpt>
+      <trkpt lat="50.28708000" lon="19.17878000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:01:44Z</time>
+      </trkpt>
+      <trkpt lat="50.28684000" lon="19.17865000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:01:54Z</time>
+      </trkpt>
+      <trkpt lat="50.28683000" lon="19.17865000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:01:54Z</time>
+      </trkpt>
+      <trkpt lat="50.28664000" lon="19.17854000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:02:02Z</time>
+      </trkpt>
+      <trkpt lat="50.28598000" lon="19.17804000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:02:32Z</time>
+      </trkpt>
+      <trkpt lat="50.28598000" lon="19.17803000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:02:32Z</time>
+      </trkpt>
+      <trkpt lat="50.28582000" lon="19.17792000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:02:39Z</time>
+      </trkpt>
+      <trkpt lat="50.28581000" lon="19.17792000">
+        <ele>300.00000</ele>
+        <time>2010-01-01T00:02:39Z</time>
+      </trkpt>
+      <trkpt lat="50.28526000" lon="19.17755000">
+        <ele>301.00000</ele>
+        <time>2010-01-01T00:03:03Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+

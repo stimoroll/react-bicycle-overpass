@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpsies="https://www.gpsies.com/GPX/1/0" creator="GPSies https://www.gpsies.com - Narutowicza_b" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://www.gpsies.com/GPX/1/0 https://www.gpsies.com/gpsies.xsd">
+  <metadata>
+    <name>Narutowicza_b</name>
+    <author>
+      <name>RowerowySosnowiec</name>
+      <link href="https://www.gpsies.com/mapUser.do?username=RowerowySosnowiec">
+        <text>RowerowySosnowiec on GPSies.com</text>
+        <type>GPSiesUserOnWeb</type>
+      </link>
+    </author>
+    <link href="https://www.gpsies.com/map.do?fileId=zpjgjxmilnqhemqu">
+      <text>Narutowicza_b on GPSies.com</text>
+      <type>trackOnWeb</type>
+    </link>
+    <time>2018-07-11T12:47:25Z</time>
+    <extensions>
+      <gpsies:property>one-way trip</gpsies:property>
+      <gpsies:trackLengthMeter>537.8230172270163</gpsies:trackLengthMeter>
+      <gpsies:totalAscentMeter>4.0</gpsies:totalAscentMeter>
+      <gpsies:totalDescentMeter>15.0</gpsies:totalDescentMeter>
+      <gpsies:minHeightMeter>255.0</gpsies:minHeightMeter>
+      <gpsies:maxHeightMeter>271.0</gpsies:maxHeightMeter>
+    </extensions>
+  </metadata>
+  <trk>
+    <name>Narutowicza_b on GPSies.com</name>
+    <link href="https://www.gpsies.com/map.do?fileId=zpjgjxmilnqhemqu">
+      <type>trackOnWeb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/zp/map/zpjgjxmilnqhemqu_map.png">
+      <type>elevationChartUrlMap</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/zp/mapThumb/zpjgjxmilnqhemqu_mapThumb.png">
+      <type>elevationChartUrlMapThumb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/zp/tab/zpjgjxmilnqhemqu_tab.png">
+      <type>elevationChartUrlTab</type>
+    </link>
+    <trkseg>
+      <trkpt lat="50.27833190" lon="19.14820530">
+        <ele>266.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.27833000" lon="19.14820000">
+        <ele>266.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.27807000" lon="19.14807000">
+        <ele>266.00000</ele>
+        <time>2010-01-01T00:00:11Z</time>
+      </trkpt>
+      <trkpt lat="50.27800000" lon="19.14820000">
+        <ele>266.00000</ele>
+        <time>2010-01-01T00:00:15Z</time>
+      </trkpt>
+      <trkpt lat="50.27796000" lon="19.14818000">
+        <ele>267.00000</ele>
+        <time>2010-01-01T00:00:17Z</time>
+      </trkpt>
+      <trkpt lat="50.27735000" lon="19.14815000">
+        <ele>270.00000</ele>
+        <time>2010-01-01T00:00:41Z</time>
+      </trkpt>
+      <trkpt lat="50.27712000" lon="19.14810000">
+        <ele>271.00000</ele>
+        <time>2010-01-01T00:00:50Z</time>
+      </trkpt>
+      <trkpt lat="50.27601000" lon="19.14803000">
+        <ele>267.00000</ele>
+        <time>2010-01-01T00:01:35Z</time>
+      </trkpt>
+      <trkpt lat="50.27552000" lon="19.14791000">
+        <ele>264.00000</ele>
+        <time>2010-01-01T00:01:55Z</time>
+      </trkpt>
+      <trkpt lat="50.27529000" lon="19.14780000">
+        <ele>264.00000</ele>
+        <time>2010-01-01T00:02:04Z</time>
+      </trkpt>
+      <trkpt lat="50.27384000" lon="19.14683000">
+        <ele>257.00000</ele>
+        <time>2010-01-01T00:03:07Z</time>
+      </trkpt>
+      <trkpt lat="50.27370000" lon="19.14679000">
+        <ele>255.00000</ele>
+        <time>2010-01-01T00:03:13Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+

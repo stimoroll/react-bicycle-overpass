@@ -1,0 +1,38 @@
+[
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "32741378",
+        "name": "Sosnowiecki Rowerj Miejski",
+        "type": "industrial"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [19.134905, 50.281514]
+      }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+        "osm_id": "32741378",
+        "name": "Sosnowiecki Rowerj Miejski",
+        "type": "industrial"
+        },
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [19.1215190, 50.2707870]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+        "osm_id": "32741378",
+        "name": "Sosnowiecki Rowerj Miejski",
+        "type": "industrial"
+        },
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [19.1215190, 50.2707870]
+        }
+    }    
+]  

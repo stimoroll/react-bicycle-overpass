@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpsies="https://www.gpsies.com/GPX/1/0" creator="GPSies https://www.gpsies.com - 3_Maja_2" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd https://www.gpsies.com/GPX/1/0 https://www.gpsies.com/gpsies.xsd">
+  <metadata>
+    <name>3_Maja_2</name>
+    <author>
+      <name>RowerowySosnowiec</name>
+      <link href="https://www.gpsies.com/mapUser.do?username=RowerowySosnowiec">
+        <text>RowerowySosnowiec on GPSies.com</text>
+        <type>GPSiesUserOnWeb</type>
+      </link>
+    </author>
+    <link href="https://www.gpsies.com/map.do?fileId=wkpmhtojdeiduxeq">
+      <text>3_Maja_2 on GPSies.com</text>
+      <type>trackOnWeb</type>
+    </link>
+    <time>2018-07-11T22:22:09Z</time>
+    <extensions>
+      <gpsies:property>one-way trip</gpsies:property>
+      <gpsies:trackLengthMeter>635.9174457110004</gpsies:trackLengthMeter>
+      <gpsies:totalAscentMeter>1.0</gpsies:totalAscentMeter>
+      <gpsies:totalDescentMeter>8.0</gpsies:totalDescentMeter>
+      <gpsies:minHeightMeter>257.0</gpsies:minHeightMeter>
+      <gpsies:maxHeightMeter>266.0</gpsies:maxHeightMeter>
+    </extensions>
+  </metadata>
+  <trk>
+    <name>3_Maja_2 on GPSies.com</name>
+    <link href="https://www.gpsies.com/map.do?fileId=wkpmhtojdeiduxeq">
+      <type>trackOnWeb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/wk/map/wkpmhtojdeiduxeq_map.png">
+      <type>elevationChartUrlMap</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/wk/mapThumb/wkpmhtojdeiduxeq_mapThumb.png">
+      <type>elevationChartUrlMapThumb</type>
+    </link>
+    <link href="https://www.gpsies.com/charts/wk/tab/wkpmhtojdeiduxeq_tab.png">
+      <type>elevationChartUrlTab</type>
+    </link>
+    <trkseg>
+      <trkpt lat="50.29133660" lon="19.15643440">
+        <ele>266.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.29133000" lon="19.15642000">
+        <ele>266.00000</ele>
+        <time>2010-01-01T00:00:00Z</time>
+      </trkpt>
+      <trkpt lat="50.29110000" lon="19.15671000">
+        <ele>266.00000</ele>
+        <time>2010-01-01T00:00:12Z</time>
+      </trkpt>
+      <trkpt lat="50.29078000" lon="19.15701000">
+        <ele>265.00000</ele>
+        <time>2010-01-01T00:00:27Z</time>
+      </trkpt>
+      <trkpt lat="50.29071000" lon="19.15702000">
+        <ele>264.00000</ele>
+        <time>2010-01-01T00:00:30Z</time>
+      </trkpt>
+      <trkpt lat="50.29055000" lon="19.15693000">
+        <ele>262.00000</ele>
+        <time>2010-01-01T00:00:36Z</time>
+      </trkpt>
+      <trkpt lat="50.29044000" lon="19.15675000">
+        <ele>261.00000</ele>
+        <time>2010-01-01T00:00:43Z</time>
+      </trkpt>
+      <trkpt lat="50.29027000" lon="19.15616000">
+        <ele>260.00000</ele>
+        <time>2010-01-01T00:00:59Z</time>
+      </trkpt>
+      <trkpt lat="50.29006000" lon="19.15540000">
+        <ele>259.00000</ele>
+        <time>2010-01-01T00:01:20Z</time>
+      </trkpt>
+      <trkpt lat="50.29001000" lon="19.15531000">
+        <ele>259.00000</ele>
+        <time>2010-01-01T00:01:23Z</time>
+      </trkpt>
+      <trkpt lat="50.28991000" lon="19.15515000">
+        <ele>260.00000</ele>
+        <time>2010-01-01T00:01:29Z</time>
+      </trkpt>
+      <trkpt lat="50.28983000" lon="19.15508000">
+        <ele>260.00000</ele>
+        <time>2010-01-01T00:01:33Z</time>
+      </trkpt>
+      <trkpt lat="50.28942000" lon="19.15485000">
+        <ele>258.00000</ele>
+        <time>2010-01-01T00:01:50Z</time>
+      </trkpt>
+      <trkpt lat="50.28933000" lon="19.15470000">
+        <ele>257.00000</ele>
+        <time>2010-01-01T00:01:56Z</time>
+      </trkpt>
+      <trkpt lat="50.28808000" lon="19.15144000">
+        <ele>258.00000</ele>
+        <time>2010-01-01T00:03:33Z</time>
+      </trkpt>
+      <trkpt lat="50.28794000" lon="19.15087000">
+        <ele>259.00000</ele>
+        <time>2010-01-01T00:03:48Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
+

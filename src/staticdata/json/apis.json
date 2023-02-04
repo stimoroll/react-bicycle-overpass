@@ -1,0 +1,18 @@
+{
+  "results":[
+    {
+      "name":"Parkingi rowerowe",
+      "url":"https://api.rowerowapolska.pl/public/api/poi?location%5Blatitude_from%5D=50.23421821830973&location%5Blatitude_to%5D=50.30794896746458&location%5Blongitude_from%5D=18.909801067692&location%5Blongitude_to%5D=19.285052837711532&type=bicycle_parking&page=1",
+      "location":[19.116034,50.2813974],
+      "type":"api",
+      "description":null
+    },
+    {
+      "name":"Stacje rowerowe",
+      "url":"https://api.rowerowapolska.pl/public/api/poi?location%5Blatitude_from%5D=50.23421821830973&location%5Blatitude_to%5D=50.30794896746458&location%5Blongitude_from%5D=18.909801067692&location%5Blongitude_to%5D=19.285052837711532&type=bicycle_repair_station&page=1",
+      "location":[19.116034,50.2813974],
+      "type":"bicycle_parkings",
+      "description":null
+    }
+  ]
+}

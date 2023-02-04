@@ -1,0 +1,8 @@
+{
+  "name": "RS",
+  "description": "Ta aplikacja pomaga w przekazywaniu datków na szczytne cele.",
+  "icons": [{
+     "src": "images/icon.png",
+     "sizes": "192×192"
+  }]
+}
