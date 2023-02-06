@@ -116,7 +116,5 @@ export default function App() {
         />
       <MapLayers toggleLayer={toggleLayer} />
     </div>
-  // latitude={48.855123611569105}
-  // longitude={2.3859649980443733}
   );
 }
