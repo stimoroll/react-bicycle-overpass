@@ -7,6 +7,7 @@ import LayerBtn from "./LayerBtn";
 type MapLayersProps = {
   toggleLayer: (key: any) => Promise<void | any>;
 };
+
 const MapLayers: React.FC<MapLayersProps> = ({ toggleLayer }) => {
   return (
     <div className="mt-3 px-3">

@@ -3,20 +3,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 import MapLeaflet from "./Map/Map";
 import MapLayers from "./Map/MapLayers";
-import { LayerMakers, layers, PolyLine } from "./Map/layers";
+import { LayerMakers, layers, LayerType, PolyLine } from "./Map/layers";
 import { fetchMarkers } from "./service/overpass";
+import { fetchWays } from './service/bicycle_ways';
 
 type poiNode = {
   lat: number,
   lon: number
 }
 
-type wayNode = {
-  id: number,
-  type: string,
-  nodes: number[]
-  tags: Object
-}
+
 
 export default function App() {
   const [activeMarkers, setActiveMarkers] = React.useState<LayerMakers[]>([]);
@@ -27,9 +23,14 @@ export default function App() {
     // TODO research POI ?
   }, [activeLayers, mapBounds])*/
 
+  const innitLayer = () => {
+
+  }
+
   // Toggle a layer on the map
   const toggleLayer = (key: any) => {
     const activeLayer = activeMarkers.find((layer) => layer.key === key);
+    //TODO: wyłączone chwilowo bo cą dwie warstwy - drogi i markery 
     if (activeLayer) {
       // Layer was found: remove its markers
       setActiveMarkers(
@@ -40,68 +41,43 @@ export default function App() {
     } else {
       // Layer not active yet
       const newLayer = layers.find((layer) => layer.key === key);
-      if (newLayer) {
-        // It layer was found, fetch its markers
-        return fetchMarkers(newLayer.query, mapBounds).then((elems) => {
-          if (typeof elems !== "boolean") {
-
-            // let myMap:Map<string, any> = new Map();
-            const nodes = new Map<string, any>();
-            const ways = new Map<string, any>();
-
-
-
-            //TODO: zdefiniuj typ 
-            const nodesArray:Array<any> = elems.filter(el => el?.type === "node").map((el:any) => {
-              if(el?.type === "node") {
-                return [el?.id, { lat: el?.lat, lon: el?.lon }]
+      if (newLayer && newLayer.type === LayerType.MARKER) {
+          return fetchMarkers(newLayer.query, mapBounds).then((elems) => {
+            if (typeof elems !== "boolean") {
+              //TODO: zmien filtry na poczatek tylko node a potem dodawaj tags amenity
+              //TODO: tags higway itp - i sprawdz literowki
+              const newMarkers: LayerMakers = {
+                key,
+                icon: newLayer.icon,
+                markers: elems
+                .filter((elem) => 
+                  elem.tags?.amenity in [...key] ||
+                  elem.tags?.amenity === key
+                  )
+                  .map((elem) => ({
+                    lat: elem.lat,
+                    lon: elem.lon,
+                    name: elem.tags?.name
+                  }))
+                  // .filter((elem) => elem.lat && elem.lon)
+                };
+                // Add the markers
+                setActiveMarkers([...activeMarkers, newMarkers]);
+                return newMarkers.markers.length;
               }
-            });
-
-            const waysArray:Array<any|wayNode> = elems.filter(el => el?.type === "way")
-
-            let map1 = new Map(nodesArray);
-            let map2 = new Map(waysArray);
-
-
-            const newLines:PolyLine[] = waysArray.map(way => {
-              way.nodes = way?.nodes.map((point: any) => {
-                const poi = map1.get(point)
-                return poi
-              })
-              return way
-            });
-
-            setActiveWays([...newLines]);
-
-
-            //TODO: zmien filtry na poczatek tylko node a potem dodawaj tags amenity 
-            //TODO: tags higway itp - i sprawdz literowki
-            const newMarkers: LayerMakers = {
-              key,
-              icon: newLayer.icon,
-              markers: elems
-                .filter((elem) => elem.type === "node" && (
-                  elem.tags?.amenity in ['school', 'restaurant'] ||
-                  elem.tags?.higway === 'bus_stop'
-                ))
-                .filter((elem) => elem.lat && elem.lon)
-                .map((elem) => ({
-                  lat: elem.lat,
-                  lon: elem.lon,
-                  name: elem.tags?.name
-                }))
-            };
-            // Add the markers
-            setActiveMarkers([...activeMarkers, newMarkers]);
-            return newMarkers.markers.length;
-          }
-        });
+            }
+          );
       } else {
-        return Promise.reject();
+          return Promise.reject();
       }
     }
   };
+
+  React.useEffect(() => {
+    // const activeLayer = activeWays.find((layer) => layer.key === key);
+    const activeLayer = layers.find((layer) => layer.key === 'bicycleways');
+    fetchWays(setActiveWays, activeLayer);
+  },[])
 
   return (
     <div className="App">
@@ -110,7 +86,7 @@ export default function App() {
         fullTitle="My marker"
         latitude={50.2713933}
         longitude={19.1598567}
-        setBounds={(bounds) => setBounds(bounds)}
+        setBounds={(bounds: React.SetStateAction<string>) => setBounds(bounds)}
         activeMarkers={activeMarkers}
         activeWays={activeWays}
         />

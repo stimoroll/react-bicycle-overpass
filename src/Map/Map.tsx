@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression } from "leaflet";
+import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression, Map } from "leaflet";
 import styled from "styled-components";
 import { LayerMakers, PolyLine, PolyLineMap } from "./layers";
 import axios from "axios";
@@ -66,6 +66,15 @@ const MapLeaflet: React.FC<MapProps> = ({
       `(${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng})`
     );
   };
+  //TILES
+  const basemaps = {
+    StreetView: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',   {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}),
+    Topography: L.tileLayer.wms('http://ows.mundialis.de/services/service?',   {layers: 'TOPO-WMS'}),
+    Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {layers: 'OSM-Overlay-WMS'})
+  };
+  // L.control.layers(basemaps).addTo(map);
+  // basemaps.Topography.addTo(map);
+
 
   // Initialize the map
   useEffect(() => {
@@ -87,14 +96,14 @@ const MapLeaflet: React.FC<MapProps> = ({
       layerWaysGroupRef.current = L.layerGroup().addTo(mapRef.current);
       layerShapeGroupRef.current = L.layerGroup().addTo(mapRef.current);
 
-      // Create marker
+      // Create marker for central position //actully removed 
       const localisation = L.marker(center);
       localisation.bindPopup(fullTitle);
       // localisation.addTo(mapRef.current);
       // Create radius around marker
       //L.circle(center, { radius: 500 }).addTo(mapRef.current);
 
-      // Map bounds update listener
+      // Map bounds update listener //actually disabled 
       mapRef.current.on("moveend", updateBounds);
       updateBounds();
     }
@@ -150,12 +159,12 @@ const MapLeaflet: React.FC<MapProps> = ({
 
   const getData = (jsonFileName: string, setResult:any) => {
     fetch(jsonFileName
-    ,{
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-    }
+      ,{
+        headers : {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
     )
       .then(function(response){
         console.log(response)
@@ -204,6 +213,7 @@ const MapLeaflet: React.FC<MapProps> = ({
     // getNextBike() //TODO: 
     getParkingiPOI()
     getStacjePOI()
+  },[]);
 
   var myStyle = {
     "color": "#EF9999",
