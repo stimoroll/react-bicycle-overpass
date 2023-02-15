@@ -17,6 +17,7 @@ type poiNode = {
 export default function App() {
   const [activeMarkers, setActiveMarkers] = React.useState<LayerMakers[]>([]);
   const [activeWays, setActiveWays] = React.useState<PolyLine[]>([])
+  const [activeRoutes, setActiveRoutes] = React.useState<(any|PolyLine)[]>([])
   const [mapBounds, setBounds] = React.useState(""); //???
 
   /**React.useEffect(() => {
@@ -76,7 +77,7 @@ export default function App() {
   React.useEffect(() => {
     // const activeLayer = activeWays.find((layer) => layer.key === key);
     const activeLayer = layers.find((layer) => layer.key === 'bicycleways');
-    fetchWays(setActiveWays, activeLayer);
+    fetchWays(setActiveWays, setActiveRoutes, activeLayer);
   },[])
 
   return (
@@ -89,6 +90,7 @@ export default function App() {
         setBounds={(bounds: React.SetStateAction<string>) => setBounds(bounds)}
         activeMarkers={activeMarkers}
         activeWays={activeWays}
+        activeRoutes={activeRoutes}
         />
       <MapLayers toggleLayer={toggleLayer} />
     </div>

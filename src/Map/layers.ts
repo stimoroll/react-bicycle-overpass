@@ -123,6 +123,7 @@ export type LayerMakers = {
 export type PolyLine = {
   key: string | undefined;
   icon: string | undefined;
+  tags: any | undefined | null;
   nodes: {
     lat: number;
     lon: number;

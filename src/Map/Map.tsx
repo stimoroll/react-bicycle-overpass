@@ -1,12 +1,34 @@
 import React, { useRef, useState, useEffect } from "react";
-import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression, Map } from "leaflet";
+import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression } from "leaflet";
 import styled from "styled-components";
 import { LayerMakers, PolyLine, PolyLineMap } from "./layers";
 import axios from "axios";
+import { activeRouteType, wayCustom } from "../service/bicycle_ways";
 // import OverPassLayer from "leaflet-overpass-layer";
+// import {hsl2rgb} from '@youc/colorconvert';
+// import cc from '@youc/colorconvert';
+// const cc = require('@youc/colorconvert').default
 
 // @ts-ignore
 // const opl = new L.OverPassLayer();
+import { hsl2rgb, rgb2hsl } from '@youc/colorconvert';
+
+
+const redH = 359;
+
+const css = (h:number, s:number, l:number) => {
+  // var hsl = [h/360, s, l]
+  // const test = {cc;
+  // console.log('CC',cc)
+  // let hsl = rgb2hsl(248, 12, 20);
+  let hsl = [Math.round(h), Math.round(s), Math.round(l)]
+  console.log(...hsl)
+  console.log({...hsl})
+  // let rgb = hsl2rgb(358,94,51)
+  let rgb = hsl2rgb(...hsl)
+  let rr = hsl2rgb(359,100,50)
+  return 'rgb(' + rgb.map((x:number) => x).join(', ') + ')'
+}
 
 type pointNextBike = {
   name: string,
@@ -14,10 +36,12 @@ type pointNextBike = {
   lng: any,
 }
 
+type tagzType = Map<string, Set<string>>;
+
 // Map container
 const StyledMap = styled.div`
   width: 100%;
-  height: 500px;
+  height: 90vh;
   z-index: 1;
 `;
 
@@ -34,6 +58,7 @@ interface MapProps {
   fullTitle: string;
   activeMarkers: LayerMakers[];
   activeWays?: PolyLine[] | null;
+  activeRoutes?: any | null;
   setBounds: (bounds: string) => void;
 }
 
@@ -44,6 +69,7 @@ const MapLeaflet: React.FC<MapProps> = ({
   fullTitle,
   activeMarkers,
   activeWays,
+  activeRoutes,
   setBounds
 }) => {
 
@@ -53,8 +79,10 @@ const MapLeaflet: React.FC<MapProps> = ({
 
   const mapRef = useRef<L.Map>();
   const layerGroupRef = useRef<L.LayerGroup>();
+  const layerPOIGroupRef = useRef<L.LayerGroup>();
   const layerWaysGroupRef = useRef<L.LayerGroup>();
   const layerShapeGroupRef = useRef<L.LayerGroup>();
+  const layerRouteGroupRef = useRef<L.LayerGroup>();
 
   // Compute a string version of the map bounds for overpass API requests
   const updateBounds = () => {
@@ -62,15 +90,18 @@ const MapLeaflet: React.FC<MapProps> = ({
     const mapBounds = mapRef.current.getBounds();
     const southWest = mapBounds.getSouthWest();
     const northEast = mapBounds.getNorthEast();
-    setBounds(
-      `(${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng})`
-    );
+    // setBounds(
+    //   `(${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng})`
+    // );
   };
   //TILES
   const basemaps = {
     StreetView: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',   {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}),
     Topography: L.tileLayer.wms('http://ows.mundialis.de/services/service?',   {layers: 'TOPO-WMS'}),
-    Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {layers: 'OSM-Overlay-WMS'})
+    Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {layers: 'OSM-Overlay-WMS'}),
+    Arcgis: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    })
   };
   // L.control.layers(basemaps).addTo(map);
   // basemaps.Topography.addTo(map);
@@ -93,6 +124,8 @@ const MapLeaflet: React.FC<MapProps> = ({
       });
       // Create layer group
       layerGroupRef.current = L.layerGroup().addTo(mapRef.current);
+      layerPOIGroupRef.current = L.layerGroup().addTo(mapRef.current);
+      layerRouteGroupRef.current = L.layerGroup().addTo(mapRef.current);
       layerWaysGroupRef.current = L.layerGroup().addTo(mapRef.current);
       layerShapeGroupRef.current = L.layerGroup().addTo(mapRef.current);
 
@@ -129,33 +162,200 @@ const MapLeaflet: React.FC<MapProps> = ({
   }, [activeMarkers]);
 
   useEffect(() => {
+    if (layerRouteGroupRef.current) {
+      let desc:any = null;
+      let style:any = {
+        color: 'grey',
+        weight: 3,
+        opacity: 1,
+        dashArray: '10, 10', dashOffset: '5'
+      };
+
+      let styleBck:any = {
+        color: 'white',
+        weight: 5,
+      }
+
+      activeRoutes?.forEach((route:activeRouteType) => {
+
+        if(route.hasOwnProperty("tags") && route?.tags) {
+          desc = Object.entries(route?.tags).map(tag => tag.join(":")).join("\n, ");
+        }
+
+        let routeLine:LatLngExpression[] = [];
+
+        route?.members.forEach((way:wayCustom) => {
+          routeLine = way.nodes.map((node:any) => {
+            return [node?.lat, node?.lon]
+          })
+          //SET background of line / outline
+          const mapLineBck = L.polyline(routeLine, styleBck);
+          if (layerRouteGroupRef.current) mapLineBck.addTo(layerRouteGroupRef.current);
+
+          //SET main color of route line
+          const mapLineFrd = L.polyline(routeLine, style);
+          mapLineFrd.bindPopup(desc).bindTooltip(desc);
+          if (layerRouteGroupRef.current) mapLineFrd.addTo(layerRouteGroupRef.current);
+        });
+        //cycle_network, from, to, state (propsed), networ: rcn, name, ref (nr),
+        //description, type=route, distance
+
+        // console.log(route.tags['type']);
+        if(route.tags['type'] === "route" || route.tags['route'] === "bicycle") {
+          // style["borderStyle"] = "double";
+          style["color"] = route.tags?.colour || route.tags?.color || "grey";
+          // console.log('style',style);
+          // console.log('route.tags',route.tags);
+        }
+      })
+    }
+  },[activeRoutes]);
+
+  useEffect(() => {
     if (layerWaysGroupRef.current) {
       // layerGroupRef.current.clearLayers();
-      /* FOR TEST ONLY SECTION
-      const line4:LatLngExpression[] = [[50.2864856,19.1427196], [50.2884856, 19.1427196]];
-      const mapLine1 = L.polyline(line4, {color: 'red'});
-        if (layerWaysGroupRef.current) mapLine1.addTo(layerWaysGroupRef.current);
+      let desc = null;
+      let style:any = {
+        color: 'grey',
+        weight: 5,
+        opacity: 0.6,
+        dashArray: '10, 10', dashOffset: '5'
+      };
 
-      const line3:LatLngExpression[] = [[50.2713933, 19.1798567], [50.2716743, 19.1599677]];
-      const mapLine2 = L.polyline(line3, {color: 'red'});
-        if (layerWaysGroupRef.current) mapLine2.addTo(layerWaysGroupRef.current); */
+      // let tagz = new Set();
+      // const tagz:map = new Map()<any>;
+      // let tagz:Map<string, Set<string>> = new Map<string, Set<string>>();
+      let tagz:tagzType = new Map<string, Set<string>>();
 
       activeWays?.forEach((way) => {
+        desc = null;
+        style = {
+          // color: 'red',
+          // borderStyle: 'solid',
+        };
         const line:LatLngExpression[] = way.nodes.map(node => [node?.lat, node?.lon]);
-        const mapLine = L.polyline(line, {color: 'red'});
+        if(way.hasOwnProperty("tags") && way?.tags) {
+          // style.dashArray: '10, 10', dashOffset: '5'
+          desc = Object.entries(way?.tags).map(ar => ar.join(":")).join("\n, ");
+          console.log('route.tags',way.tags);
+          Object.entries(way?.tags).forEach((key:(string|any)[]) => {
+            // console.log('key:',key)
+            if(tagz?.has(key[0])) {
+              (tagz.get(key[0]))?.add(key[1]);
+            } else {
+              tagz?.set(key[0], (new Set<string>()).add(key[1]) );
+            }
+          });
+
+
+          const mapSurface = (value:string) => {
+            //asphalt, paved, paving_stones
+            const mapSurfaceToStyle:{[index: string]:any} = {
+              'asphalt' : {},
+              'paving_stones' : { dashArray: '5, 5', dashOffset: '3' },
+              'paved' : { dashArray: '10, 10', dashOffset: '5' },
+              'concrete' : { dashArray: '10, 10', dashOffset: '5' },
+              'wood' : { dashArray: '10, 10', dashOffset: '5' }
+            }
+            return mapSurfaceToStyle[value];
+          }
+          const mapFriendnesToColor = (key: string, value:any) => {
+            //leyer, 1, 2, 3, -1 - zmiana koloru lub natęenia
+            //zmiana koloru lepsza byłaby
+            let opacity = 1;
+            let colorL = 50;
+            switch(key) {
+              case "layer":
+                if(value !== 1) { opacity -= 0.3; colorL -= 0.1; }
+                break;
+              case "smoothness":
+                if(value !== "good") { opacity -= 0.1; colorL -= 0.05; }
+                if(value !== "intermediate") { opacity -= 0.3; colorL -= 0.1; }
+                break;
+            }
+            return { 
+              opacity: opacity, 
+              color: css(redH, colorL, 50)
+            }
+          }
+
+        type TagsMapType = {
+          [index:(string|symbol|number)]:any
+        }
+          const tagsMap = new Object({
+            "width": (value:any) => { return { width: value }},
+            "layer": (value:number) => {return mapFriendnesToColor("layer", value)},
+            "surface": (value:any) => {return mapSurface(value)},
+            "cycleway:surface": (value:any) => {return mapSurface(value)},
+            "smoothness": (value:number) => {return mapFriendnesToColor("smoothness", value)}
+          });
+
+
+          // const tagsMap:Map<string, Function> = new Map({
+          //   "width": (value:any) => { return { width: value }},
+          //   "layer": (value:number) => mapFriendnesToColor("layer", value),
+          //   "surface": (value:any) => mapSurface(value),
+          //   "cycleway:surface": (value:any) => mapSurface(value),
+          //   "smoothness": (value:number) => mapFriendnesToColor("smoothness", value),
+          // });
+
+          const styles = Object.entries(way.tags).map(([key, value]:[string, unknown]) => {
+            // const [key, value] = tag;
+            
+            // if(typeof tagsMap[key] === 'function') {console.log("TAG:", tagsMap[key](value));}
+            const fn = (tagsMap as TagsMapType)[key];
+            if(typeof fn === 'function') { 
+              // console.log('FN', fn(value));
+              return fn(value);
+            } 
+            return null;
+          }).filter(style => style !== null);
+          console.log('STYLES', styles)
+
+          //TODO: dziwne rgb wychodzi - zobaczyć trzeba 
+          //TODO: dziwne opacity wychodzi
+          //TODO: join na obiektach
+
+          // surface -> czy value == asphalt  - ciągłe, przerywane (beton), kropkowane (kostka)
+          //{'asphalt', 'paving_stones', 'paved', 'concrete', 'wood', …}
+          // - surface / cycleway:surface: asphalt, paved, paving_stones, 
+          // - smoothness: intermediate, excellent, good
+          // - surface: note
+          // - check_data:surface
+          // - cyclway: width - nie wprowadzone nigdzie
+          // - width: 4, 5, 2
+          // - layer: 1, 3, 2, -1
+          // - crossing: traffic_singals, uncontrolled, marked
+          // - cycleway: width: 1.5
+          // - cycleway: crossing
+
+          
+
+          // style = Object.assign({},
+          //   styles.reduce()
+          //   //  tagsMap.
+          // )
+
+          style = styles.reduce((a, v) => ({ ...a, ...v}), {})
+
+          // new Map(way?.tags)
+
+          // console.log(tagz);
+          //bicycle: designated; 
+          //cycleway:surface: 'asphalt'
+
+            
+        }
+        
+        const mapLine = L.polyline(line, style);
+        if (desc) {
+          mapLine.bindPopup(desc).bindTooltip(desc);
+        }
+        // console.log(way, way?.tags);
         if (layerWaysGroupRef.current) mapLine.addTo(layerWaysGroupRef.current);
       })
     }
   }, [activeWays])
-
-  // $.getJSON("/data/json/parkingi.json", function(response) {
-  //   console.log("parkingi", response.results);
-  //   setPoi(response.results);
-  // }).catch(function(error) {});
-
-  // $.getJSON("/data/json/stacje.json", function(response) {
-  //   console.log("stacje", response.results);
-  // }).catch(function(error) {});
 
   const getData = (jsonFileName: string, setResult:any) => {
     fetch(jsonFileName
@@ -211,8 +411,8 @@ const MapLeaflet: React.FC<MapProps> = ({
   useEffect(() => {
     getSosnowiecBoundary();
     // getNextBike() //TODO: 
-    getParkingiPOI()
-    getStacjePOI()
+    // getParkingiPOI()
+    // getStacjePOI()
   },[]);
 
   var myStyle = {
@@ -241,3 +441,5 @@ const MapLeaflet: React.FC<MapProps> = ({
 };
 
 export default MapLeaflet;
+
+
