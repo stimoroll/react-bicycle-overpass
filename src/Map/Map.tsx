@@ -147,15 +147,21 @@ const MapLeaflet: React.FC<MapProps> = ({
     if (layerGroupRef.current) {
       layerGroupRef.current.clearLayers();
 
+      //TODO: mało tuatj informacji warto mieć więcej
+      //TODO: pierwsze to ikonka - zrobić ikonkę
       activeMarkers.forEach((layer) => {
         const icon = new L.Icon({ iconUrl: layer.icon });
         layer.markers.forEach((marker) => {
-          const pos: LatLngTuple = [marker.lat, marker.lon];
-          const mapMarker = L.marker(pos, { icon });
-          if (marker.name) {
-            mapMarker.bindPopup(marker.name);
+          if(marker && marker?.lat > 0 && marker?.lon > 0) {
+            const pos: LatLngTuple = [marker.lat, marker.lon];
+            const mapMarker = L.marker(pos, { icon });
+            if (marker.name) {
+              mapMarker.bindPopup(marker.name);
+            }
+            if (layerGroupRef.current) mapMarker.addTo(layerGroupRef.current);
+          } else {
+            console.log('ERROR MARKER', marker);
           }
-          if (layerGroupRef.current) mapMarker.addTo(layerGroupRef.current);
         });
       });
     }
@@ -329,29 +335,14 @@ const MapLeaflet: React.FC<MapProps> = ({
           // - cycleway: width: 1.5
           // - cycleway: crossing
 
-          
-
-          // style = Object.assign({},
-          //   styles.reduce()
-          //   //  tagsMap.
-          // )
-
           style = styles.reduce((a, v) => ({ ...a, ...v}), {})
-
-          // new Map(way?.tags)
-
-          // console.log(tagz);
-          //bicycle: designated; 
-          //cycleway:surface: 'asphalt'
-
-            
         }
         
         const mapLine = L.polyline(line, style);
         if (desc) {
           mapLine.bindPopup(desc).bindTooltip(desc);
         }
-        // console.log(way, way?.tags);
+
         if (layerWaysGroupRef.current) mapLine.addTo(layerWaysGroupRef.current);
       })
     }
