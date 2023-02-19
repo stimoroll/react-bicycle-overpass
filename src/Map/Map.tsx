@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression } from "leaflet";
+import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression, LayerGroup } from "leaflet";
 import styled from "styled-components";
 import { LayerMakers, PolyLine, PolyLineMap } from "./layers";
 import axios from "axios";
@@ -13,6 +13,7 @@ import { activeRouteType, wayCustom } from "../service/bicycle_ways";
 // const opl = new L.OverPassLayer();
 import { hsl2rgb, rgb2hsl } from '@youc/colorconvert';
 
+let layerControl = L.control;
 
 const redH = 359;
 
@@ -84,6 +85,9 @@ const MapLeaflet: React.FC<MapProps> = ({
   const layerShapeGroupRef = useRef<L.LayerGroup>();
   const layerRouteGroupRef = useRef<L.LayerGroup>();
 
+  // const layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+  // const layerControl = L.control;
+
   // Compute a string version of the map bounds for overpass API requests
   const updateBounds = () => {
     if (!mapRef.current) return;
@@ -105,6 +109,13 @@ const MapLeaflet: React.FC<MapProps> = ({
   };
   // L.control.layers(basemaps).addTo(map);
   // basemaps.Topography.addTo(map);
+
+  const baseLayers = {
+      "StreetView": basemaps.StreetView,
+      "Topography": basemaps.Topography,
+      "Places": basemaps.Places,
+      "ArcGist": basemaps.Arcgis
+    }
 
 
   // Initialize the map
@@ -128,6 +139,16 @@ const MapLeaflet: React.FC<MapProps> = ({
       layerRouteGroupRef.current = L.layerGroup().addTo(mapRef.current);
       layerWaysGroupRef.current = L.layerGroup().addTo(mapRef.current);
       layerShapeGroupRef.current = L.layerGroup().addTo(mapRef.current);
+
+      const layerControl = L.control.layers(baseLayers, {
+        "Pahts": layerGroupRef.current,
+        "POI": layerPOIGroupRef.current,
+        "Routes": layerRouteGroupRef.current,
+        "ways": layerWaysGroupRef.current,
+        "shape": layerShapeGroupRef.current,
+      }).addTo(mapRef.current);
+
+      // layerControl.attribution.
 
       // Create marker for central position //actully removed 
       const localisation = L.marker(center);
