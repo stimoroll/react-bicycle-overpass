@@ -1,13 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
-import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression, LayerGroup } from "leaflet";
+import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression, LayerGroup, GPX } from "leaflet";
 import styled from "styled-components";
 import { LayerMakers, PolyLine, PolyLineMap } from "./layers";
 import axios from "axios";
 import { activeRouteType, wayCustom } from "../service/bicycle_ways";
-// import OverPassLayer from "leaflet-overpass-layer";
-// import {hsl2rgb} from '@youc/colorconvert';
-// import cc from '@youc/colorconvert';
-// const cc = require('@youc/colorconvert').default
+import { gpxList } from "./GPX";
+import {} from "leaflet-gpx";
 
 // @ts-ignore
 // const opl = new L.OverPassLayer();
@@ -18,14 +16,7 @@ let layerControl = L.control;
 const redH = 359;
 
 const css = (h:number, s:number, l:number) => {
-  // var hsl = [h/360, s, l]
-  // const test = {cc;
-  // console.log('CC',cc)
-  // let hsl = rgb2hsl(248, 12, 20);
   let hsl = [Math.round(h), Math.round(s), Math.round(l)]
-  console.log(...hsl)
-  console.log({...hsl})
-  // let rgb = hsl2rgb(358,94,51)
   let rgb = hsl2rgb(...hsl)
   let rr = hsl2rgb(359,100,50)
   return 'rgb(' + rgb.map((x:number) => x).join(', ') + ')'
@@ -77,6 +68,7 @@ const MapLeaflet: React.FC<MapProps> = ({
   const [SVGOutline, setSVGOutline] = useState(null);
   const [poi, setPoi] = useState(null);
   const [poiNextBike, setPoiNextBike] = useState(null);
+  const [pbike, setPBike] = useState(null);
 
   const mapRef = useRef<L.Map>();
   const layerGroupRef = useRef<L.LayerGroup>();
@@ -84,6 +76,7 @@ const MapLeaflet: React.FC<MapProps> = ({
   const layerWaysGroupRef = useRef<L.LayerGroup>();
   const layerShapeGroupRef = useRef<L.LayerGroup>();
   const layerRouteGroupRef = useRef<L.LayerGroup>();
+  const layerGPXGroupRef = useRef<L.LayerGroup>();
 
   // const layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
   // const layerControl = L.control;
@@ -139,6 +132,7 @@ const MapLeaflet: React.FC<MapProps> = ({
       layerRouteGroupRef.current = L.layerGroup().addTo(mapRef.current);
       layerWaysGroupRef.current = L.layerGroup().addTo(mapRef.current);
       layerShapeGroupRef.current = L.layerGroup().addTo(mapRef.current);
+      layerGPXGroupRef.current = L.layerGroup().addTo(mapRef.current);
 
       const layerControl = L.control.layers(baseLayers, {
         "Pahts": layerGroupRef.current,
@@ -146,16 +140,51 @@ const MapLeaflet: React.FC<MapProps> = ({
         "Routes": layerRouteGroupRef.current,
         "ways": layerWaysGroupRef.current,
         "shape": layerShapeGroupRef.current,
+        "GPX": layerGPXGroupRef.current,
       }).addTo(mapRef.current);
 
-      // layerControl.attribution.
+      
+      gpxList.forEach((gpxFile) => {
+        // const url = `http://localhost:3000/gpxs/Andresa-asfalt-5.gpx`;
+        const url = `http://localhost:3000/gpxs/${gpxFile}`;
+        console.log('GPX:', url)
+        // const gpxString = await 
+        fetch(url).then((res) =>
+          res.text()
+        ).then((gpxString) => {
+          // Guck hier Papa, bzw rechts in die Console
+          console.log(gpxString.slice(0, 50));
+          // L.
+          const lgpx = new GPX(gpxString, {
+            async: true,
+            polyline_options: {
+              color: 'green',
+              opacity: 0.5,
+              weight: 7,
+              lineCap: 'round'
+            }
+            // marker_options: {
+            //   startIconUrl: "pin-icon-start.png",
+            //   endIconUrl: "pin-icon-end.png",
+            //   shadowUrl: "pin-shadow.png"
+            // }
+          }).on("loaded", (e) => {
+            //po załadowaniu GPX
+            //mona tu style oczytać
+            var gpx = e.target;
+            console.log("EE", e.target);
+          })
+          .addTo(mapRef?.current as L.Map);
+          console.log('L.GPX:',lgpx)
+        })
+
+    }
+  );
+
 
       // Create marker for central position //actully removed 
       const localisation = L.marker(center);
       localisation.bindPopup(fullTitle);
-      // localisation.addTo(mapRef.current);
-      // Create radius around marker
-      //L.circle(center, { radius: 500 }).addTo(mapRef.current);
 
       // Map bounds update listener //actually disabled 
       mapRef.current.on("moveend", updateBounds);
@@ -264,9 +293,7 @@ const MapLeaflet: React.FC<MapProps> = ({
         if(way.hasOwnProperty("tags") && way?.tags) {
           // style.dashArray: '10, 10', dashOffset: '5'
           desc = Object.entries(way?.tags).map(ar => ar.join(":")).join("\n, ");
-          console.log('route.tags',way.tags);
           Object.entries(way?.tags).forEach((key:(string|any)[]) => {
-            // console.log('key:',key)
             if(tagz?.has(key[0])) {
               (tagz.get(key[0]))?.add(key[1]);
             } else {
@@ -317,15 +344,6 @@ const MapLeaflet: React.FC<MapProps> = ({
             "smoothness": (value:number) => {return mapFriendnesToColor("smoothness", value)}
           });
 
-
-          // const tagsMap:Map<string, Function> = new Map({
-          //   "width": (value:any) => { return { width: value }},
-          //   "layer": (value:number) => mapFriendnesToColor("layer", value),
-          //   "surface": (value:any) => mapSurface(value),
-          //   "cycleway:surface": (value:any) => mapSurface(value),
-          //   "smoothness": (value:number) => mapFriendnesToColor("smoothness", value),
-          // });
-
           const styles = Object.entries(way.tags).map(([key, value]:[string, unknown]) => {
             // const [key, value] = tag;
             
@@ -337,11 +355,6 @@ const MapLeaflet: React.FC<MapProps> = ({
             } 
             return null;
           }).filter(style => style !== null);
-          console.log('STYLES', styles)
-
-          //TODO: dziwne rgb wychodzi - zobaczyć trzeba 
-          //TODO: dziwne opacity wychodzi
-          //TODO: join na obiektach
 
           // surface -> czy value == asphalt  - ciągłe, przerywane (beton), kropkowane (kostka)
           //{'asphalt', 'paving_stones', 'paved', 'concrete', 'wood', …}
@@ -369,6 +382,13 @@ const MapLeaflet: React.FC<MapProps> = ({
     }
   }, [activeWays])
 
+  const getGPX = (gpxFileName: string, callback:any) => {
+    fetch(gpxFileName).then((response) => {
+      console.log(response);
+      if(callback) { callback(); }
+    })
+  }
+
   const getData = (jsonFileName: string, setResult:any) => {
     fetch(jsonFileName
       ,{
@@ -379,18 +399,28 @@ const MapLeaflet: React.FC<MapProps> = ({
       }
     )
       .then(function(response){
-        console.log(response)
+        console.log('RESPONSE:', response)
         return response.json();
       })
       .then(function(myJson) {
-        console.log(myJson);
+        console.log('JSON:', myJson);
         setResult(myJson)
       });
   }
 
   const getParkingiPOI = () => getData('parkingi.json', setPoi);
   const getStacjePOI = () => getData('stacje.json', setPoi);
-  const getSosnowiecBoundary = () => getData('sosnowiec.json', setSVGOutline);  
+  const getSosnowiecBoundary = () => getData('sosnowiec.json', setSVGOutline);
+
+  const getGPX1 = () => getGPX('gpxs/Andresa-asfalt-5.gpx', setPBike)
+
+  gpxList.forEach((gpxFile) => {
+    const gpxPath = `gpxs/${gpxFile}`
+    const getGPX1 = () => getGPX(gpxPath, setPBike)
+  })
+
+
+
 
 
   //TODO: do włączenia około 1 kwietnia = teraz jest nieaktuwne i nie zwraca danych
@@ -422,6 +452,7 @@ const MapLeaflet: React.FC<MapProps> = ({
 
   useEffect(() => {
     getSosnowiecBoundary();
+    getGPX1();
     // getNextBike() //TODO: 
     // getParkingiPOI()
     // getStacjePOI()
@@ -433,10 +464,26 @@ const MapLeaflet: React.FC<MapProps> = ({
     "opacity": 0.2
 };
 
+  useEffect(() => {
+    // if(mapRef && mapRef.current) {
+    // const url = 'http://localhost:3000/gpxs/Andresa-asfalt-5.gpx',
+    // new L.GPX(url, {
+    //   async: true,
+    //   marker_options: {
+    //     startIconUrl: 'images/pin-icon-start.png',
+    //     endIconUrl: 'images/pin-icon-end.png',
+    //     shadowUrl: 'images/pin-shadow.png'
+    //   }
+    // }).on('loaded', function(e) {
+    //   mapRef.current.fitBounds(e.target.getBounds());
+    // }).addTo(mapRef.current);
+    // }
+  }, [pbike, mapRef])
+
   useEffect(() =>{
     if(SVGOutline && layerShapeGroupRef?.current) {
       layerShapeGroupRef.current.clearLayers();
-      console.log("SVGOutline", SVGOutline);
+      // console.log("SVGOutline", SVGOutline);
       const sosno = L.geoJSON(SVGOutline,{
         style: myStyle
       })

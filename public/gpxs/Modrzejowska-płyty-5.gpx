@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://gpx.studio">
+<metadata>
+    <name>Modrzejowska-płyty-5</name>
+    <author>
+        <name>gpx.studio</name>
+        <link href="https://gpx.studio"></link>
+    </author>
+</metadata>
+<trk>
+    <name>Modrzejowska-płyty-5</name>
+    <type>Cycling</type>
+    <extensions>
+        <gpx_style:line>
+        <color>ff9600</color>
+        <opacity>0.7</opacity>
+        <weight>3</weight>
+        </gpx_style:line>
+    </extensions>
+    <trkseg>
+    <trkpt lat="50.274894" lon="19.13307">
+        <ele>259.8</ele>
+    </trkpt>
+    <trkpt lat="50.275467" lon="19.131739">
+        <ele>260.3</ele>
+    </trkpt>
+    <trkpt lat="50.275471" lon="19.131729">
+        <ele>260.3</ele>
+    </trkpt>
+    <trkpt lat="50.2755" lon="19.131663">
+        <ele>260.0</ele>
+    </trkpt>
+    <trkpt lat="50.275524" lon="19.131603">
+        <ele>260.0</ele>
+    </trkpt>
+    <trkpt lat="50.275535" lon="19.131578">
+        <ele>259.8</ele>
+    </trkpt>
+    <trkpt lat="50.27614" lon="19.13021">
+        <ele>259.3</ele>
+    </trkpt>
+    <trkpt lat="50.276795" lon="19.128795">
+        <ele>259.8</ele>
+    </trkpt>
+    <trkpt lat="50.277225" lon="19.12787">
+        <ele>258.3</ele>
+    </trkpt>
+    <trkpt lat="50.277447" lon="19.127336">
+        <ele>256.8</ele>
+    </trkpt>
+    <trkpt lat="50.277458" lon="19.127308">
+        <ele>256.8</ele>
+    </trkpt>
+    <trkpt lat="50.277467" lon="19.127285">
+        <ele>256.8</ele>
+    </trkpt>
+    </trkseg>
+</trk>
+</gpx>
