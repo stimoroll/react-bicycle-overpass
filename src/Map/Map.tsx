@@ -38,16 +38,6 @@ async function parseStyle(gpxString:string) {
 async function getGpxs(fileName: string) {
   const result = await fetch(fileName)
     .then((response) => response.text())
-    // .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
-/*    .then((dataGpx: XMLDocument) => {
-      const gpxProps = dataGpx.getRootNode().firstChild?.childNodes[3]
-        .childNodes[5].childNodes[1];
-      return {
-        color: gpxProps?.childNodes[1].firstChild?.nodeValue,
-        opacity: gpxProps?.childNodes[3].firstChild?.nodeValue,
-        weight: gpxProps?.childNodes[5].firstChild?.nodeValue
-      };
-    }); */
   return result;
 }
 
@@ -178,12 +168,12 @@ const MapLeaflet: React.FC<MapProps> = ({
 
       const options:GPXOptions = {
         async: true,
-        polyline_options: {
-          color: 'green',
-          opacity: 0.5,
-          weight: 7,
-          lineCap: 'round'
-        },
+        // polyline_options: {
+        //   color: 'green',
+        //   opacity: 0.5,
+        //   weight: 7,
+        //   lineCap: 'round'
+        // },
         marker_options: {
           startIcon: undefined,
           endIcon: undefined,
@@ -203,7 +193,7 @@ const MapLeaflet: React.FC<MapProps> = ({
 
           getX(url).then(gpxObject => {
             const gpxFile = gpxObject.gpx;
-            options.polyline_options = gpxObject.style as L.PolylineOptions;
+            // options.polyline_options = gpxObject.style as L.PolylineOptions;
             new GPX(gpxFile, 
               options
               )
@@ -215,19 +205,6 @@ const MapLeaflet: React.FC<MapProps> = ({
           })
 
         }
-
-        /*
-        fetch(url).then((res) =>
-          res.text()
-        ).then((gpxString) => {
-          const lgpx = new GPX(gpxString, options
-          ).on("loaded", (e) => {
-            var gpx = e.target;
-            console.log("EE", e.target);
-          })
-          .addTo(mapRef?.current as L.Map);
-          console.log('L.GPX:',lgpx)
-        })*/
 
       });
 
