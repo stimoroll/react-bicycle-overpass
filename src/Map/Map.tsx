@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression, LayerGroup, GPX } from "leaflet";
+import L, { LatLngExpression, LatLngTuple, LatLngBoundsExpression, LayerGroup, GPX, GPXOptions } from "leaflet";
 import styled from "styled-components";
 import { LayerMakers, PolyLine, PolyLineMap } from "./layers";
 import axios from "axios";
@@ -8,12 +8,65 @@ import { gpxList } from "./GPX";
 import {} from "leaflet-gpx";
 
 // @ts-ignore
-// const opl = new L.OverPassLayer();
 import { hsl2rgb, rgb2hsl } from '@youc/colorconvert';
 
 let layerControl = L.control;
 
 const redH = 359;
+
+async function getX(fileName: string) {
+  return await getGpxs(fileName).then(data => {
+    const style = parseStyle;
+    return {
+      gpx: data,
+      style: style
+    }
+  })
+}
+
+async function parseStyle(gpxString:string) {
+  const xml:XMLDocument =  new window.DOMParser().parseFromString(gpxString, "text/xml")
+  const gpxProps = xml.getRootNode().firstChild?.childNodes[3]
+  .childNodes[5].childNodes[1];
+  return {
+    color: gpxProps?.childNodes[1].firstChild?.nodeValue,
+    opacity: gpxProps?.childNodes[3].firstChild?.nodeValue,
+    weight: gpxProps?.childNodes[5].firstChild?.nodeValue
+  }
+}
+
+async function getGpxs(fileName: string) {
+  const result = await fetch(fileName)
+    .then((response) => response.text())
+    // .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
+/*    .then((dataGpx: XMLDocument) => {
+      const gpxProps = dataGpx.getRootNode().firstChild?.childNodes[3]
+        .childNodes[5].childNodes[1];
+      return {
+        color: gpxProps?.childNodes[1].firstChild?.nodeValue,
+        opacity: gpxProps?.childNodes[3].firstChild?.nodeValue,
+        weight: gpxProps?.childNodes[5].firstChild?.nodeValue
+      };
+    }); */
+  return result;
+}
+
+  //TILES
+  const basemaps = {
+    StreetView: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',   {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}),
+    Topography: L.tileLayer.wms('http://ows.mundialis.de/services/service?',   {layers: 'TOPO-WMS'}),
+    Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {layers: 'OSM-Overlay-WMS'}),
+    Arcgis: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    })
+  };
+
+  const baseLayers = {
+      "StreetView": basemaps.StreetView,
+      "Topography": basemaps.Topography,
+      "Places": basemaps.Places,
+      "ArcGist": basemaps.Arcgis
+    }
 
 const css = (h:number, s:number, l:number) => {
   let hsl = [Math.round(h), Math.round(s), Math.round(l)]
@@ -87,28 +140,8 @@ const MapLeaflet: React.FC<MapProps> = ({
     const mapBounds = mapRef.current.getBounds();
     const southWest = mapBounds.getSouthWest();
     const northEast = mapBounds.getNorthEast();
-    // setBounds(
-    //   `(${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng})`
-    // );
   };
-  //TILES
-  const basemaps = {
-    StreetView: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',   {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}),
-    Topography: L.tileLayer.wms('http://ows.mundialis.de/services/service?',   {layers: 'TOPO-WMS'}),
-    Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {layers: 'OSM-Overlay-WMS'}),
-    Arcgis: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    })
-  };
-  // L.control.layers(basemaps).addTo(map);
-  // basemaps.Topography.addTo(map);
 
-  const baseLayers = {
-      "StreetView": basemaps.StreetView,
-      "Topography": basemaps.Topography,
-      "Places": basemaps.Places,
-      "ArcGist": basemaps.Arcgis
-    }
 
 
   // Initialize the map
@@ -143,43 +176,60 @@ const MapLeaflet: React.FC<MapProps> = ({
         "GPX": layerGPXGroupRef.current,
       }).addTo(mapRef.current);
 
-      
+      const options:GPXOptions = {
+        async: true,
+        polyline_options: {
+          color: 'green',
+          opacity: 0.5,
+          weight: 7,
+          lineCap: 'round'
+        },
+        marker_options: {
+          startIcon: undefined,
+          endIcon: undefined,
+          startIconUrl: undefined,
+          endIconUrl: undefined
+        },
+        gpx_options: {
+          parseElements: ['track', 'route', 'waypoint'] 
+        }
+      }
+
       gpxList.forEach((gpxFile) => {
-        // const url = `http://localhost:3000/gpxs/Andresa-asfalt-5.gpx`;
         const url = `http://localhost:3000/gpxs/${gpxFile}`;
         console.log('GPX:', url)
-        // const gpxString = await 
+
+        if(mapRef && mapRef?.current) {
+
+          getX(url).then(gpxObject => {
+            const gpxFile = gpxObject.gpx;
+            options.polyline_options = gpxObject.style as L.PolylineOptions;
+            new GPX(gpxFile, 
+              options
+              )
+              .on("loaded", function (e) {
+                console.log("EE", e.target);
+                //mapRef?.current.fitBounds(e.target.getBounds());
+              })
+              .addTo(layerGPXGroupRef?.current as L.LayerGroup);
+          })
+
+        }
+
+        /*
         fetch(url).then((res) =>
           res.text()
         ).then((gpxString) => {
-          // Guck hier Papa, bzw rechts in die Console
-          console.log(gpxString.slice(0, 50));
-          // L.
-          const lgpx = new GPX(gpxString, {
-            async: true,
-            polyline_options: {
-              color: 'green',
-              opacity: 0.5,
-              weight: 7,
-              lineCap: 'round'
-            }
-            // marker_options: {
-            //   startIconUrl: "pin-icon-start.png",
-            //   endIconUrl: "pin-icon-end.png",
-            //   shadowUrl: "pin-shadow.png"
-            // }
-          }).on("loaded", (e) => {
-            //po załadowaniu GPX
-            //mona tu style oczytać
+          const lgpx = new GPX(gpxString, options
+          ).on("loaded", (e) => {
             var gpx = e.target;
             console.log("EE", e.target);
           })
           .addTo(mapRef?.current as L.Map);
           console.log('L.GPX:',lgpx)
-        })
+        })*/
 
-    }
-  );
+      });
 
 
       // Create marker for central position //actully removed 

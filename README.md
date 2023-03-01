@@ -92,3 +92,13 @@ CreatedwithCodeSandbox
 29
 	key : "abandoned:railway"
 	value :  {'rail'}
+
+
+== TODO ==
+* add markers and other useful points
+* add Line drawing; GPX class helps to convert it to GPX https://github.com/fabulator/gpx-builder
+
+
+==DOCS ==
+* for GPX : https://github.com/mpetazzoni/leaflet-gpx/blob/main/README.md
+
