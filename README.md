@@ -130,5 +130,9 @@ https://github.com/tyrasd/osmtogeojson#readme
 
 OWN TILE
 https://wiki.openstreetmap.org/wiki/Creating_your_own_tiles
+https://github.com/magellium/osmtilemaker
+https://switch2osm.org/serving-tiles/
+https://github.com/magellium/osmtilemaker
+
 
 
