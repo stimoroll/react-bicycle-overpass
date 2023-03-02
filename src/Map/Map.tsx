@@ -48,6 +48,16 @@ async function getGpxs(fileName: string) {
     Places: L.tileLayer.wms('http://ows.mundialis.de/services/service?', {layers: 'OSM-Overlay-WMS'}),
     Arcgis: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }),
+    CycleMap: L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {attribution: '&copy; Cycle-Map'}),
+    OpenStreetMap_HOT: L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+	    maxZoom: 19,
+	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+    }),
+    OpenStreetMap_BZH: L.tileLayer('https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles courtesy of <a href="http://www.openstreetmap.bzh/" target="_blank">Breton OpenStreetMap Team</a>',
+      bounds: [[46.2, -5.5], [50, 0.7]]
     })
   };
 
@@ -55,7 +65,10 @@ async function getGpxs(fileName: string) {
       "StreetView": basemaps.StreetView,
       "Topography": basemaps.Topography,
       "Places": basemaps.Places,
-      "ArcGist": basemaps.Arcgis
+      "ArcGist": basemaps.Arcgis,
+      "CycleMap": basemaps.CycleMap,
+      "OpenStreetMap_HOT": basemaps.OpenStreetMap_HOT,
+      "OpenStreetMap_BZH:": basemaps.OpenStreetMap_BZH
     }
 
 const css = (h:number, s:number, l:number) => {

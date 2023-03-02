@@ -6,12 +6,22 @@ import MapLayers from "./Map/MapLayers";
 import { LayerMakers, layers, LayerType, PolyLine } from "./Map/layers";
 import { fetchMarkers } from "./service/overpass";
 import { fetchWays } from './service/bicycle_ways';
+import styled from "styled-components";
 
 type poiNode = {
   lat: number,
   lon: number
 }
 
+const AllContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  &:nth-child(2) {
+    order: 0;
+    flex: 1 0 auto;
+    align-self: auto;
+  }
+`;
 
 
 export default function App() {
@@ -82,17 +92,19 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Leaflet CodeSandbox</h1>
-      <MapLeaflet
-        fullTitle="My marker"
-        latitude={50.2713933}
-        longitude={19.1598567}
-        setBounds={(bounds: React.SetStateAction<string>) => setBounds(bounds)}
-        activeMarkers={activeMarkers}
-        activeWays={activeWays}
-        activeRoutes={activeRoutes}
-        />
-      <MapLayers toggleLayer={toggleLayer} />
+      <h1>Sosnowiec Bike Map</h1>
+      <AllContainer>
+        <MapLeaflet
+          fullTitle="My marker"
+          latitude={50.2713933}
+          longitude={19.1598567}
+          setBounds={(bounds: React.SetStateAction<string>) => setBounds(bounds)}
+          activeMarkers={activeMarkers}
+          activeWays={activeWays}
+          activeRoutes={activeRoutes}
+          />
+        <MapLayers toggleLayer={toggleLayer} />
+      </AllContainer>
     </div>
   );
 }
