@@ -13,6 +13,7 @@ import { hsl2rgb, rgb2hsl } from '@youc/colorconvert';
 let layerControl = L.control;
 
 const redH = 359;
+const key = 'fsbnWk7i4Arhs1UYNQPu';
 
 async function getX(fileName: string) {
   return await getGpxs(fileName).then(data => {
@@ -58,6 +59,13 @@ async function getGpxs(fileName: string) {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles courtesy of <a href="http://www.openstreetmap.bzh/" target="_blank">Breton OpenStreetMap Team</a>',
       bounds: [[46.2, -5.5], [50, 0.7]]
+    }),
+    Maptiler: L.tileLayer(`https://api.maptiler.com/tiles/hillshade/{z}/{x}/{y}.png?key=${key}`,{ //style URL
+      tileSize: 512,
+      zoomOffset: -1,
+      minZoom: 1,
+      attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
+      crossOrigin: true
     })
   };
 
@@ -68,7 +76,8 @@ async function getGpxs(fileName: string) {
       "ArcGist": basemaps.Arcgis,
       "CycleMap": basemaps.CycleMap,
       "OpenStreetMap_HOT": basemaps.OpenStreetMap_HOT,
-      "OpenStreetMap_BZH:": basemaps.OpenStreetMap_BZH
+      "OpenStreetMap_BZH:": basemaps.OpenStreetMap_BZH,
+      "Maptiler": basemaps.Maptiler,
     }
 
 const css = (h:number, s:number, l:number) => {
@@ -498,10 +507,15 @@ const MapLeaflet: React.FC<MapProps> = ({
     // getStacjePOI()
   },[]);
 
-  var myStyle = {
-    "color": "#EF9999",
-    "weight": 2,
-    "opacity": 0.2
+  var svgOutnlineStyle = {
+    // "color": "#EFEFEF",
+    // "weight": 2,
+    // "opacity": 0.1,
+    "fillColor": "#EFEFEF",
+    "color": "#FFF",
+    "weight": 5,
+    "opacity": 1,
+    "fillOpacity": 0.3
 };
 
   useEffect(() => {
@@ -525,7 +539,7 @@ const MapLeaflet: React.FC<MapProps> = ({
       layerShapeGroupRef.current.clearLayers();
       // console.log("SVGOutline", SVGOutline);
       const sosno = L.geoJSON(SVGOutline,{
-        style: myStyle
+        style: svgOutnlineStyle
       })
       if(sosno && mapRef.current) {
         sosno.addTo(mapRef.current);
