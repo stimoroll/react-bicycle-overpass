@@ -101,4 +101,34 @@ CreatedwithCodeSandbox
 
 ==DOCS ==
 * for GPX : https://github.com/mpetazzoni/leaflet-gpx/blob/main/README.md
+* GPX https://github.com/mpetazzoni/leaflet-gpx
+* GeoSeaRCH https://github.com/smeijer/leaflet-geosearch
+* Sidebar https://github.com/dwilhelm89/LeafletSlider
+* Elevation - taki wykres pod mapą wyświetla https://raruto.github.io/leaflet-elevation/
+* Route find https://github.com/perliedman/leaflet-routing-machine
+* Editable path https://github.com/Leaflet/Leaflet.Editable
+* Draw https://github.com/alex3165/react-leaflet-draw
+* Measure https://github.com/ljagis/leaflet-measure
+* Image https://github.com/mapbox/leaflet-image
+* Print https://github.com/Igor-Vladyka/leaflet.browser.print
+* Casto CSS Style: https://github.com/cyclosm/cyclosm-cartocss-style
+* Opacity control https://github.com/dayjournal/Leaflet.Control.Opacity
+* Gesture https://github.com/Raruto/leaflet-gesture-handling
+
+
+Example
+https://radservice.radroutenplaner.nrw.de/rrp/nrwrs/cgi?lang=DE&view=342489,5697435,417997,5726583&shapes=Radschnellwege,Stationen#
+
+
+OSM OVERPASS
+https://wiki.openstreetmap.org/wiki/Poland/Podział_administracyjny#Miasta
+https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dadministrative#10_admin_level_values_for_specific_countries
+https://overpass-turbo.eu/ - saved queires
+https://wiki.openstreetmap.org/wiki/Tag:network=rcn?uselang=pl
+https://github.com/tyrasd/osmtogeojson#readme
+
+
+OWN TILE
+https://wiki.openstreetmap.org/wiki/Creating_your_own_tiles
+
 
